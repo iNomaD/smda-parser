@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.intersys.classes.ListOfObjects;
 import com.intersys.classes.ListOfObjectsWithClassName;
+import com.intersys.classes.RelationshipObject;
 import com.intersys.jdbc.SysList;
 import com.intersys.objects.CacheDatabase;
 import com.intersys.objects.CacheException;
@@ -49,10 +50,10 @@ public class DBConnector {
 		return null;
 	}
 	
-	private Analysis analysisExists(String anName, List<Analysis> anList){
+	private Analysis analysisExists(String servCode, List<Analysis> anList){
 		for(Analysis an : anList){
 			try {
-				if(an.getNameOfTest().equals(anName)){
+				if(an.getServiceCode().equals(servCode)){
 					return an;
 				}
 			} catch (CacheException e) {
@@ -62,8 +63,21 @@ public class DBConnector {
 		return null;
 	}
 	
-	private Diary diaryExists(String diaryData, List<Diary> diaryList){
-		for(Diary d : diaryList){
+	private Test testExists(String anName, List<Test> testList){
+		for(Test test : testList){
+			try{
+				if(test.getNameOfTest().equals(anName)){
+					return test;
+				}
+			} catch(CacheException e){
+				e.printStackTrace();
+			}
+		}
+		return null;
+	}
+	
+	private Epicrisis diaryExists(String diaryData, List<Epicrisis> diaryList){
+		for(Epicrisis d : diaryList){
 			try {
 				if(d.getData().equals(diaryData)){
 					return d;
@@ -89,10 +103,7 @@ public class DBConnector {
 		return java.sql.Time.valueOf(time+":00");
 	}
 	
-	public void upload(ArrayList<T1row> tab1, ArrayList<T2row> tab2){
-		connect();
-		
-		//загружаем всех пациентов из базы данных
+	private List<Patient> getAllPatients(){
 		List<Patient> pats = new ArrayList<Patient>();
 		try {
 			Iterator k = dbcon.openByQuery("SELECT smda.Patient.%ID FROM smda.Patient");
@@ -101,8 +112,18 @@ public class DBConnector {
 			}
 		} catch (CacheException e) {
 			e.printStackTrace();
+			return null;
+		}
+		return pats;
+	}
+	
+	public void upload(ArrayList<T1row> tab1, ArrayList<T2row> tab2){
+		connect();
+		
+		//загружаем всех пациентов из базы данных
+		List<Patient> pats = getAllPatients();
+		if(pats == null) {
 			System.out.println("Error while loading database. Exit.");
-			return;
 		}
 		
 		try {
@@ -122,39 +143,60 @@ public class DBConnector {
 				Patient patient = patientExists(regNumber, pats);
 				if(patient != null){
 					//пациент уже существует
-					Episode ep = episodeExists(epNumber, patient.getlistOfEpisodes());
+					Episode ep = episodeExists(epNumber, patient.getEpisodes().asList());
 					if(ep != null){
 						//эпизод уже существует
-						Analysis an = analysisExists(anName, ep.getlistOfAnalysis());
-						if(an == null){
-							//новый анализ, если не существует
+						Analysis an = analysisExists(serviceCode, ep.getAnalyses().asList());
+						if(an != null){
+							//анализ уже существует
+							Test test = testExists(anName, an.getlistOfTests());
+							if(test == null){
+								//тест ещё не существует
+								//новый тест
+								Test test1 = new Test(dbcon);
+								test1.setNameOfTest(anName);
+								test1.setResult(result);
+								test1.setMesurementUnits(mesUn);
+								an.getlistOfTests().add(test1);
+							}
+						}
+						else{
+							//новый анализ
 							Analysis an1 = new Analysis(dbcon);
 							an1.setServiceCode(serviceCode);
 							an1.setServiceName(serviceName);
-							an1.setNameOfTest(anName);
-							an1.setResult(result);
-							an1.setMesurementUnits(mesUn);
 							an1.setmDate(date);
 							an1.setmTime(time);
-							ep.getlistOfAnalysis().add(an1);
+							ep.getAnalyses().asList().add(an1);
+							
+							//новый тест
+							Test test = new Test(dbcon);
+							test.setNameOfTest(anName);
+							test.setResult(result);
+							test.setMesurementUnits(mesUn);
+							an1.getlistOfTests().add(test);
 						}
 					}
 					else{
 						//новый эпизод
 						ep = new Episode(dbcon);
-						patient.getlistOfEpisodes().add(ep);
+						patient.getEpisodes().asList().add(ep);
 						ep.setEpisodeNumber(epNumber);
 						
 						//новый анализ
 						Analysis an1 = new Analysis(dbcon);
 						an1.setServiceCode(serviceCode);
 						an1.setServiceName(serviceName);
-						an1.setNameOfTest(anName);
-						an1.setResult(result);
-						an1.setMesurementUnits(mesUn);
 						an1.setmDate(date);
 						an1.setmTime(time);
-						ep.getlistOfAnalysis().add(an1);
+						ep.getAnalyses().asList().add(an1);
+						
+						//новый тест
+						Test test = new Test(dbcon);
+						test.setNameOfTest(anName);
+						test.setResult(result);
+						test.setMesurementUnits(mesUn);
+						an1.getlistOfTests().add(test);
 					}
 				}
 				else{
@@ -167,19 +209,23 @@ public class DBConnector {
 					
 					//новый эпизод
 					Episode ep = new Episode(dbcon);
-					patient.getlistOfEpisodes().add(ep);
+					patient.getEpisodes().asList().add(ep);
 					ep.setEpisodeNumber(epNumber);
 					
 					//новый анализ
 					Analysis an1 = new Analysis(dbcon);
 					an1.setServiceCode(serviceCode);
 					an1.setServiceName(serviceName);
-					an1.setNameOfTest(anName);
-					an1.setResult(result);
-					an1.setMesurementUnits(mesUn);
 					an1.setmDate(date);
 					an1.setmTime(time);
-					ep.getlistOfAnalysis().add(an1);
+					ep.getAnalyses().asList().add(an1);
+					
+					//новый тест
+					Test test = new Test(dbcon);
+					test.setNameOfTest(anName);
+					test.setResult(result);
+					test.setMesurementUnits(mesUn);
+					an1.getlistOfTests().add(test);
 				}
 			}
 			System.out.println("1 table - OK");
@@ -201,14 +247,14 @@ public class DBConnector {
 						patient.setMedCardNumber(medCardNumber);
 					}
 					
-					Diary d = diaryExists(data, patient.getlistOfDiaries());
+					Epicrisis d = diaryExists(data, patient.getEpicrises().asList());
 					if(d == null){
 						//новая запись, если такой ещё не существует
-						Diary diary = new Diary(dbcon);
+						Epicrisis diary = new Epicrisis(dbcon);
 						diary.setData(data);
 						diary.setmDate(mDate);
 						diary.setStatus(status);
-						patient.getlistOfDiaries().add(diary);
+						patient.getEpicrises().asList().add(diary);
 					}
 					
 				}
@@ -221,11 +267,11 @@ public class DBConnector {
 					patient.setRegNumber(regNumber);
 					
 					//новая запись
-					Diary diary = new Diary(dbcon);
+					Epicrisis diary = new Epicrisis(dbcon);
 					diary.setData(data);
 					diary.setmDate(mDate);
 					diary.setStatus(status);
-					patient.getlistOfDiaries().add(diary);
+					patient.getEpicrises().asList().add(diary);
 				}
 			}
 			System.out.println("2 table - OK");
