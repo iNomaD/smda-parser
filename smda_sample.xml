@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Export generator="Cache" version="25" zv="Cache for Windows (x86-64) 2016.1 (Build 617U)" ts="2016-01-19 02:33:41">
+<Class name="smda.Analysis">
+<Super>%Persistent</Super>
+<TimeChanged>63933,79462.074071</TimeChanged>
+<TimeCreated>63891,69631.028429</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Код оказанной услуги
+
+]]></Content>
+</UDLText>
+
+<Property name="ServiceCode">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="255"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Наименование услуги
+
+]]></Content>
+</UDLText>
+
+<Property name="ServiceName">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="255"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Дата выполнения
+
+]]></Content>
+</UDLText>
+
+<Property name="mDate">
+<Type>%Date</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Время выполнения
+
+]]></Content>
+</UDLText>
+
+<Property name="mTime">
+<Type>%Time</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Эпизод, в котором был выполнен анализ
+
+]]></Content>
+</UDLText>
+
+<Property name="Episode">
+<Type>smda.Episode</Type>
+<Cardinality>one</Cardinality>
+<Inverse>Analyses</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Index name="EpisodeIndex">
+<Properties>Episode</Properties>
+</Index>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Тесты, из которых состоит анализ
+
+]]></Content>
+</UDLText>
+
+<Property name="listOfTests">
+<Type>Test</Type>
+<Collection>list</Collection>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^smda.AnalysisD</DataLocation>
+<DefaultData>AnalysisDefaultData</DefaultData>
+<IdLocation>^smda.AnalysisD</IdLocation>
+<IndexLocation>^smda.AnalysisI</IndexLocation>
+<StreamLocation>^smda.AnalysisS</StreamLocation>
+<Data name="AnalysisDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>ServiceCode</Value>
+</Value>
+<Value name="3">
+<Value>ServiceName</Value>
+</Value>
+<Value name="4">
+<Value>NameOfTest</Value>
+</Value>
+<Value name="5">
+<Value>Result</Value>
+</Value>
+<Value name="6">
+<Value>MesurementUnits</Value>
+</Value>
+<Value name="7">
+<Value>Date</Value>
+</Value>
+<Value name="8">
+<Value>Time</Value>
+</Value>
+<Value name="9">
+<Value>mDate</Value>
+</Value>
+<Value name="10">
+<Value>mTime</Value>
+</Value>
+<Value name="11">
+<Value>Episode</Value>
+</Value>
+<Value name="12">
+<Value>listOfTests</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+
+
+<Class name="smda.Epicrisis">
+<Super>%Persistent</Super>
+<TimeChanged>63933,79462.035811</TimeChanged>
+<TimeCreated>63933,78125.883979</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Содержание заметки
+
+]]></Content>
+</UDLText>
+
+<Property name="Data">
+<Type>%Text</Type>
+<Parameter name="MAXLEN" value="10000"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Статус: *АНАМНЕЗ* или ВЫПИСНОЙ_ЭПИКРИЗ или ДИАГНОЗ* или ДНЕВНИК или ЖАЛОБЫ 
+
+]]></Content>
+</UDLText>
+
+<UDLText name="T">
+<Content><![CDATA[
+// или *МАГНИТНО* или *ЭКГ* или РЕКОМЕНДАЦИИ или *ОСМОТР* или ЭХО*
+
+]]></Content>
+</UDLText>
+
+<Property name="Status">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="255"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Дата составления
+
+]]></Content>
+</UDLText>
+
+<Property name="mDate">
+<Type>%Date</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Пациент, к которому относится эпикриз
+
+]]></Content>
+</UDLText>
+
+<Property name="Patient">
+<Type>smda.Patient</Type>
+<Cardinality>one</Cardinality>
+<Inverse>Epicrises</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Index name="PatientIndex">
+<Properties>Patient</Properties>
+</Index>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^smda.EpicrisisD</DataLocation>
+<DefaultData>EpicrisisDefaultData</DefaultData>
+<IdLocation>^smda.EpicrisisD</IdLocation>
+<IndexLocation>^smda.EpicrisisI</IndexLocation>
+<StreamLocation>^smda.EpicrisisS</StreamLocation>
+<Data name="EpicrisisDefaultData">
+<Structure>listnode</Structure>
+<Subscript/>
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>Data</Value>
+</Value>
+<Value name="3">
+<Value>Status</Value>
+</Value>
+<Value name="4">
+<Value>mDate</Value>
+</Value>
+<Value name="5">
+<Value>Patient</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+
+
+<Class name="smda.Episode">
+<Super>%Persistent</Super>
+<TimeChanged>63933,79462.036714</TimeChanged>
+<TimeCreated>63891,69262.312745</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Номер эпизода
+
+]]></Content>
+</UDLText>
+
+<Property name="EpisodeNumber">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Дата начала эпизода
+
+]]></Content>
+</UDLText>
+
+<Property name="StartDate">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Дата окончания эпизода
+
+]]></Content>
+</UDLText>
+
+<Property name="EndDate">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Лечащий врач
+
+]]></Content>
+</UDLText>
+
+<Property name="Doctor">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Пациент, к которому относится эпизод
+
+]]></Content>
+</UDLText>
+
+<Property name="Patient">
+<Type>smda.Patient</Type>
+<Cardinality>one</Cardinality>
+<Inverse>Episodes</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Index name="PatientIndex">
+<Properties>Patient</Properties>
+</Index>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Анализы, которые относятся к данному эпизоду
+
+]]></Content>
+</UDLText>
+
+<Property name="Analyses">
+<Type>smda.Analysis</Type>
+<Cardinality>many</Cardinality>
+<Inverse>Episode</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^smda.EpisodeD</DataLocation>
+<DefaultData>EpisodeDefaultData</DefaultData>
+<IdLocation>^smda.EpisodeD</IdLocation>
+<IndexLocation>^smda.EpisodeI</IndexLocation>
+<StreamLocation>^smda.EpisodeS</StreamLocation>
+<Data name="EpisodeDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>EpisodeNumber</Value>
+</Value>
+<Value name="3">
+<Value>listOfAnalysis</Value>
+</Value>
+<Value name="4">
+<Value>StartDate</Value>
+</Value>
+<Value name="5">
+<Value>EndDate</Value>
+</Value>
+<Value name="6">
+<Value>Doctor</Value>
+</Value>
+<Value name="7">
+<Value>Patient</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+
+
+<Class name="smda.NumericCriterium">
+<Super>smda.Test</Super>
+<TimeChanged>63936,2826.331068</TimeChanged>
+<TimeCreated>63935,83644.159852</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Результат
+
+]]></Content>
+</UDLText>
+
+<Property name="Result">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="255"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Единицы измерения
+
+]]></Content>
+</UDLText>
+
+<Property name="MesurementUnits">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Путь для сохранения Java прокси классов
+
+]]></Content>
+</UDLText>
+
+<Projection name="PatientJava">
+<Type>%Projection.Java</Type>
+<Parameter name="ROOTDIR" value="C:\Projects\Cache\Java"/>
+</Projection>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DefaultData>NumericCriteriumDefaultData</DefaultData>
+<Data name="NumericCriteriumDefaultData">
+<Subscript>"NumericCriterium"</Subscript>
+<Value name="1">
+<Value>Result</Value>
+</Value>
+<Value name="2">
+<Value>MesurementUnits</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+
+
+<Class name="smda.OrganolepticCriterium">
+<Super>smda.Test</Super>
+<TimeChanged>63936,2828.746599</TimeChanged>
+<TimeCreated>63935,83642.167532</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Результат (характеристика)
+
+]]></Content>
+</UDLText>
+
+<Property name="Result">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="255"/>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Путь для сохранения Java прокси классов
+
+]]></Content>
+</UDLText>
+
+<Projection name="PatientJava">
+<Type>%Projection.Java</Type>
+<Parameter name="ROOTDIR" value="C:\Projects\Cache\Java"/>
+</Projection>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DefaultData>OrganolepticCriteriumDefaultData</DefaultData>
+<Data name="OrganolepticCriteriumDefaultData">
+<Subscript>"OrganolepticCriterium"</Subscript>
+<Value name="1">
+<Value>Result</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+
+
+<Class name="smda.Patient">
+<Super>%Persistent</Super>
+<TimeChanged>63933,79461.973771</TimeChanged>
+<TimeCreated>63891,69630.588387</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// ФИО
+
+]]></Content>
+</UDLText>
+
+<Property name="FIO">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Регистрационный номер
+
+]]></Content>
+</UDLText>
+
+<Property name="RegNumber">
+<Type>%String</Type>
+<Required>1</Required>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Номер мед. карты
+
+]]></Content>
+</UDLText>
+
+<Property name="MedCardNumber">
+<Type>%String</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Дата рождения
+
+]]></Content>
+</UDLText>
+
+<Property name="BirthDate">
+<Type>%Date</Type>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Эпизоды, относящиеся к пациенту
+
+]]></Content>
+</UDLText>
+
+<Property name="Episodes">
+<Type>smda.Episode</Type>
+<Cardinality>many</Cardinality>
+<Inverse>Patient</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Эпикризы, написанные о состоянии данного пациента
+
+]]></Content>
+</UDLText>
+
+<Property name="Epicrises">
+<Type>smda.Epicrisis</Type>
+<Cardinality>many</Cardinality>
+<Inverse>Patient</Inverse>
+<Relationship>1</Relationship>
+</Property>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Путь для сохранения Java прокси классов
+
+]]></Content>
+</UDLText>
+
+<Projection name="PatientJava">
+<Type>%Projection.Java</Type>
+<Parameter name="ROOTDIR" value="C:\Projects\Cache\Java"/>
+</Projection>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^smda.PatientD</DataLocation>
+<DefaultData>PatientDefaultData</DefaultData>
+<IdLocation>^smda.PatientD</IdLocation>
+<IndexLocation>^smda.PatientI</IndexLocation>
+<StreamLocation>^smda.PatientS</StreamLocation>
+<Data name="PatientDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>FIO</Value>
+</Value>
+<Value name="3">
+<Value>RegNumber</Value>
+</Value>
+<Value name="4">
+<Value>MedCardNumber</Value>
+</Value>
+<Value name="5">
+<Value>listOfDiaries</Value>
+</Value>
+<Value name="6">
+<Value>listOfEpisodes</Value>
+</Value>
+<Value name="7">
+<Value>BirthDate</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+
+
+<Class name="smda.Test">
+<Super>%Persistent</Super>
+<TimeChanged>63936,6250.773995</TimeChanged>
+<TimeCreated>63933,79227.845615</TimeCreated>
+
+<UDLText name="T">
+<Content><![CDATA[
+// Наименование теста
+
+]]></Content>
+</UDLText>
+
+<Property name="NameOfTest">
+<Type>%String</Type>
+<Parameter name="MAXLEN" value="255"/>
+</Property>
+
+<Storage name="Default">
+<Type>%Library.CacheStorage</Type>
+<DataLocation>^smda.TestD</DataLocation>
+<DefaultData>TestDefaultData</DefaultData>
+<IdLocation>^smda.TestD</IdLocation>
+<IndexLocation>^smda.TestI</IndexLocation>
+<StreamLocation>^smda.TestS</StreamLocation>
+<Data name="TestDefaultData">
+<Value name="1">
+<Value>%%CLASSNAME</Value>
+</Value>
+<Value name="2">
+<Value>NameOfTest</Value>
+</Value>
+</Data>
+</Storage>
+</Class>
+</Export>

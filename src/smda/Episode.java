@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class Episode extends com.intersys.classes.Persistent {
-    private static final long serialVersionUID = 7031;
+    private static final long serialVersionUID = 4308;
     private static String CACHE_CLASS_NAME = "smda.Episode";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).

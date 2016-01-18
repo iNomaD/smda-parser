@@ -2,7 +2,13 @@ package etu.wollen.cache;
 
 public class Main {
 	public static void main(String args[]) {
-		TableParser parser = new TableParser(new DBConnector());
+		//данные для подключения
+		String url = "jdbc:Cache://localhost:1972/DENIS";
+		String username = "denis";
+		String password = "root";
+		
+		//создание и запуск парсера
+		TableParser parser = new TableParser(new DBConnector(url, username, password));
 		String table1 = "table1.csv";
 		String table2 = "table2.csv";
 		try{

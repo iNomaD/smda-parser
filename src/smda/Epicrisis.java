@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class Epicrisis extends com.intersys.classes.Persistent {
-    private static final long serialVersionUID = 6824;
+    private static final long serialVersionUID = 5143;
     private static String CACHE_CLASS_NAME = "smda.Epicrisis";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).

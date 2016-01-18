@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.intersys.classes.ListOfObjects;
 import com.intersys.classes.ListOfObjectsWithClassName;
+import com.intersys.classes.Persistent;
 import com.intersys.classes.RelationshipObject;
 import com.intersys.jdbc.SysList;
 import com.intersys.objects.CacheDatabase;
@@ -23,67 +24,57 @@ import com.intersys.objects.SysListHolder;
 public class DBConnector {
 	
 	private Database dbcon;
+	private String url;
+	private String username;
+	private String password;
 	
-	private Patient patientExists(String regNumber, List<Patient> patList){
+	public DBConnector(String url, String username, String password){
+		this.url=url;
+		this.username=username;
+		this.password=password;
+		connect();
+	}
+	
+	private Patient patientExists(String regNumber, List<Patient> patList) throws CacheException{
 		for(Patient p : patList){
-			try {
-				if(p.getRegNumber().equals(regNumber)){
-					return p;
-				}
-			} catch (CacheException e) {
-				e.printStackTrace();
+			if(p.getRegNumber().equals(regNumber)){
+				return p;
 			}
 		}
 		return null;
 	}
 	
-	private Episode episodeExists(String epNumber, List<Episode> epList){
+	private Episode episodeExists(String epNumber, List<Episode> epList) throws CacheException{
 		for(Episode ep : epList){
-			try {
-				if(ep.getEpisodeNumber().equals(epNumber)){
-					return ep;
-				}
-			} catch (CacheException e) {
-				e.printStackTrace();
+			if(ep.getEpisodeNumber().equals(epNumber)){
+				return ep;
 			}
 		}
 		return null;
 	}
 	
-	private Analysis analysisExists(String servCode, List<Analysis> anList){
+	private Analysis analysisExists(String servCode, List<Analysis> anList) throws CacheException{
 		for(Analysis an : anList){
-			try {
-				if(an.getServiceCode().equals(servCode)){
-					return an;
-				}
-			} catch (CacheException e) {
-				e.printStackTrace();
+			if(an.getServiceCode().equals(servCode)){
+				return an;
 			}
 		}
 		return null;
 	}
 	
-	private Test testExists(String anName, List<Test> testList){
+	private Test testExists(String anName, List<Test> testList) throws CacheException{
 		for(Test test : testList){
-			try{
-				if(test.getNameOfTest().equals(anName)){
-					return test;
-				}
-			} catch(CacheException e){
-				e.printStackTrace();
+			if(test != null && test.getNameOfTest().equals(anName)){
+				return test;
 			}
 		}
 		return null;
 	}
 	
-	private Epicrisis diaryExists(String diaryData, List<Epicrisis> diaryList){
+	private Epicrisis diaryExists(String diaryData, List<Epicrisis> diaryList) throws CacheException{
 		for(Epicrisis d : diaryList){
-			try {
-				if(d.getData().equals(diaryData)){
-					return d;
-				}
-			} catch (CacheException e) {
-				e.printStackTrace();
+			if(d.getData().equals(diaryData)){
+				return d;
 			}
 		}
 		return null;
@@ -103,27 +94,43 @@ public class DBConnector {
 		return java.sql.Time.valueOf(time+":00");
 	}
 	
-	private List<Patient> getAllPatients(){
+	private List<Patient> getAllPatients() throws CacheException{
 		List<Patient> pats = new ArrayList<Patient>();
-		try {
-			Iterator k = dbcon.openByQuery("SELECT smda.Patient.%ID FROM smda.Patient");
-			while (k.hasNext()) {
-				pats.add(((Patient) k.next()));
-			}
-		} catch (CacheException e) {
-			e.printStackTrace();
-			return null;
+		Iterator k = dbcon.openByQuery("SELECT smda.Patient.%ID FROM smda.Patient");
+		while (k.hasNext()) {
+			pats.add(((Patient) k.next()));
 		}
+
 		return pats;
 	}
 	
+	private Test createTest(String anName, String result, String mesUn) throws CacheException{
+		//Органолептический критерий
+		if(mesUn.equals("???")){
+			OrganolepticCriterium test = new OrganolepticCriterium(dbcon);
+			test.setNameOfTest(anName);
+			test.setResult(result);
+			return test;
+		}
+		//Численный критерий
+		else{
+			NumericCriterium test = new NumericCriterium(dbcon);
+			test.setNameOfTest(anName);
+			test.setResult(result);
+			test.setMesurementUnits(mesUn);
+			return test;
+		}
+	}
+	
 	public void upload(ArrayList<T1row> tab1, ArrayList<T2row> tab2){
-		connect();
-		
 		//загружаем всех пациентов из базы данных
-		List<Patient> pats = getAllPatients();
-		if(pats == null) {
+		List<Patient> pats;
+		try {
+			pats = getAllPatients();
+		} catch (CacheException e) {
+			e.printStackTrace();
 			System.out.println("Error while loading database. Exit.");
+			return;
 		}
 		
 		try {
@@ -153,10 +160,7 @@ public class DBConnector {
 							if(test == null){
 								//тест ещё не существует
 								//новый тест
-								Test test1 = new Test(dbcon);
-								test1.setNameOfTest(anName);
-								test1.setResult(result);
-								test1.setMesurementUnits(mesUn);
+								Test test1 = createTest(anName, result, mesUn);
 								an.getlistOfTests().add(test1);
 							}
 						}
@@ -170,10 +174,7 @@ public class DBConnector {
 							ep.getAnalyses().asList().add(an1);
 							
 							//новый тест
-							Test test = new Test(dbcon);
-							test.setNameOfTest(anName);
-							test.setResult(result);
-							test.setMesurementUnits(mesUn);
+							Test test = createTest(anName, result, mesUn);
 							an1.getlistOfTests().add(test);
 						}
 					}
@@ -192,10 +193,7 @@ public class DBConnector {
 						ep.getAnalyses().asList().add(an1);
 						
 						//новый тест
-						Test test = new Test(dbcon);
-						test.setNameOfTest(anName);
-						test.setResult(result);
-						test.setMesurementUnits(mesUn);
+						Test test = createTest(anName, result, mesUn);
 						an1.getlistOfTests().add(test);
 					}
 				}
@@ -221,10 +219,7 @@ public class DBConnector {
 					ep.getAnalyses().asList().add(an1);
 					
 					//новый тест
-					Test test = new Test(dbcon);
-					test.setNameOfTest(anName);
-					test.setResult(result);
-					test.setMesurementUnits(mesUn);
+					Test test = createTest(anName, result, mesUn);
 					an1.getlistOfTests().add(test);
 				}
 			}
@@ -278,6 +273,7 @@ public class DBConnector {
 		}
 		catch (CacheException ex) {
 			System.out.println("Caught exception: " + ex.getClass().getName() + ": " + ex.getMessage());
+			return;
 		}
 		
 		save();
@@ -286,19 +282,7 @@ public class DBConnector {
 	public void connect() {
 		try {
 			// Connect to the Cache' database
-			
-			String url = "jdbc:Cache://localhost:1972/DENIS";
-			String username = "denis";
-			String password = "root";
 			dbcon = CacheDatabase.getDatabase(url, username, password);
-			
-			
-			//remote access
-			/*
-			String url = "jdbc:Cache://localhost:1972/DENIS";
-			String username = "denis";
-			String password = "root";
-			dbcon = CacheDatabase.getDatabase(url, username, password);*/
 		}
 		// Handle exceptions
 		catch (CacheException ex) {
@@ -315,16 +299,30 @@ public class DBConnector {
 		}
 	}
 	
+	private void deleteTable(String tableName) throws CacheException{
+		Iterator k = dbcon.openByQuery("SELECT smda."+tableName+".%ID FROM smda."+tableName);
+		while (k.hasNext()) {
+			Persistent item = (Persistent)k.next();
+			Persistent.delete(dbcon, item.getOid());
+		}
+	}
+	
 	public void deleteBD(){
-		/*
 		try {
-			dbcon.openByQuery("DELETE FROM smda.Diary");
+			//deleteTable("NumericCriterium");
+			//deleteTable("OrganolepticCriterium");
+			deleteTable("Test");
+			deleteTable("Analysis");
+			deleteTable("Episode");
+			deleteTable("Epicrisis");
+			deleteTable("Patient");
+			
+			connect(); //reconnect
 			System.out.println("DELETE BD OK");
 		} catch (CacheException e) {
 			e.printStackTrace();
-			System.out.println("Error while loading database. Exit.");
+			System.out.println("Error while manipulation database. Exit.");
 			return;
 		}
-		*/
 	}
 }
