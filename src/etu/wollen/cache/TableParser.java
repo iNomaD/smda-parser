@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-//строка таблицы xls (абстрактный класс)
+//Г±ГІГ°Г®ГЄГ  ГІГ ГЎГ«ГЁГ¶Г» xls (Г ГЎГ±ГІГ°Г ГЄГІГ­Г»Г© ГЄГ«Г Г±Г±)
 abstract class Txrow {
 	private int size;
 	private String[] fld;
@@ -30,20 +30,20 @@ abstract class Txrow {
 	}
 }
 
-//строка 1 таблицы
+//Г±ГІГ°Г®ГЄГ  1 ГІГ ГЎГ«ГЁГ¶Г»
 class T1row extends Txrow{
 	/*
-	 * 0 = номер п/п
-	 * 1 = рег номер
-	 * 2 = фио
-	 * 3 = номер эпизода
-	 * 4 = код мед услуги
-	 * 5 = услуга
-	 * 6 = наименование теста
-	 * 7 = понятие (результат)
-	 * 8 = единица измерения
-	 * 9 = дата выполнения
-	 * 10 = время выполнения
+	 * 0 = Г­Г®Г¬ГҐГ° ГЇ/ГЇ
+	 * 1 = Г°ГҐГЈ Г­Г®Г¬ГҐГ°
+	 * 2 = ГґГЁГ®
+	 * 3 = Г­Г®Г¬ГҐГ° ГЅГЇГЁГ§Г®Г¤Г 
+	 * 4 = ГЄГ®Г¤ Г¬ГҐГ¤ ГіГ±Г«ГіГЈГЁ
+	 * 5 = ГіГ±Г«ГіГЈГ 
+	 * 6 = Г­Г ГЁГ¬ГҐГ­Г®ГўГ Г­ГЁГҐ ГІГҐГ±ГІГ 
+	 * 7 = ГЇГ®Г­ГїГІГЁГҐ (Г°ГҐГ§ГіГ«ГјГІГ ГІ)
+	 * 8 = ГҐГ¤ГЁГ­ГЁГ¶Г  ГЁГ§Г¬ГҐГ°ГҐГ­ГЁГї
+	 * 9 = Г¤Г ГІГ  ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї
+	 * 10 = ГўГ°ГҐГ¬Гї ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї
 	 */
 	public final static int size = 11;
 	public T1row(){
@@ -51,16 +51,16 @@ class T1row extends Txrow{
 	}
 }
 
-//строка 2 таблицы
+//Г±ГІГ°Г®ГЄГ  2 ГІГ ГЎГ«ГЁГ¶Г»
 class T2row extends Txrow{
 	/*
-	 * 0 = номер п/п
-	 * 1 = рег номер
-	 * 2 = фио
-	 * 3 = номер мед карты
-	 * 4 = статус
-	 * 5 = дата выполнения
-	 * 6 = данные
+	 * 0 = Г­Г®Г¬ГҐГ° ГЇ/ГЇ
+	 * 1 = Г°ГҐГЈ Г­Г®Г¬ГҐГ°
+	 * 2 = ГґГЁГ®
+	 * 3 = Г­Г®Г¬ГҐГ° Г¬ГҐГ¤ ГЄГ Г°ГІГ»
+	 * 4 = Г±ГІГ ГІГіГ±
+	 * 5 = Г¤Г ГІГ  ГўГ»ГЇГ®Г«Г­ГҐГ­ГЁГї
+	 * 6 = Г¤Г Г­Г­Г»ГҐ
 	 */
 	public final static int size = 7;
 	public T2row(){
@@ -75,7 +75,7 @@ public class TableParser {
 	private ArrayList<T1row> tab1 = null;
 	private static ArrayList<T2row> tab2 = null;
 	
-	final static String newline = "<BR>";
+	final static String newline = " ";
 	
 	public TableParser(DBConnector db){
 		this.db = db;
@@ -94,7 +94,7 @@ public class TableParser {
 	public void parse(String table1, String table2) throws Exception{
 		BufferedReader br = null;
 		try {
-			//читаем первую таблицу
+			//Г·ГЁГІГ ГҐГ¬ ГЇГҐГ°ГўГіГѕ ГІГ ГЎГ«ГЁГ¶Гі
 			br = new BufferedReader(new FileReader(table1));
 		    String line = br.readLine();
 		    line = br.readLine();
@@ -102,15 +102,15 @@ public class TableParser {
 		    	String[] parts = line.split(";");
 		    	int len = parts.length;
 		    	if(len < 11){
-		    		if(len == 8){ //если продолжение 7 столбца на другой строке
+		    		if(len == 8){ //ГҐГ±Г«ГЁ ГЇГ°Г®Г¤Г®Г«Г¦ГҐГ­ГЁГҐ 7 Г±ГІГ®Г«ГЎГ¶Г  Г­Г  Г¤Г°ГіГЈГ®Г© Г±ГІГ°Г®ГЄГҐ
 			    		T1row row = tab1.get(tab1.size()-1);
 			    		row.set(7, row.get(7)+newline+parts[7]);
 		    		}
-		    		else{  //если там вообще ничего не распарсить на строке
+		    		else{  //ГҐГ±Г«ГЁ ГІГ Г¬ ГўГ®Г®ГЎГ№ГҐ Г­ГЁГ·ГҐГЈГ® Г­ГҐ Г°Г Г±ГЇГ Г°Г±ГЁГІГј Г­Г  Г±ГІГ°Г®ГЄГҐ
 		    			System.out.println("Can't parse: "+line);
 		    		}
 		    	}
-		    	else{ // если всё нормально
+		    	else{ // ГҐГ±Г«ГЁ ГўГ±Вё Г­Г®Г°Г¬Г Г«ГјГ­Г®
 		    		T1row row = new T1row();
 		    		for(int i=0; i<11; ++i){
 		    			row.set(i, parts[i]);
@@ -121,7 +121,7 @@ public class TableParser {
 		    }
 		    br.close();
 		    
-		    //читаем вторую таблицу
+		    //Г·ГЁГІГ ГҐГ¬ ГўГІГ®Г°ГіГѕ ГІГ ГЎГ«ГЁГ¶Гі
 			br = new BufferedReader(new FileReader(table2));
 		    line = br.readLine();
 		    line = br.readLine();
@@ -129,25 +129,25 @@ public class TableParser {
 		    	String[] parts = line.split(";");
 		    	int len = parts.length;
 		    	if(len < 7){ 
-		    		if(len == 1){ //если были кривые ';'
+		    		if(len == 1){ //ГҐГ±Г«ГЁ ГЎГ»Г«ГЁ ГЄГ°ГЁГўГ»ГҐ ';'
 			    		T2row row = tab2.get(tab2.size()-1);
 			    		row.set(6, row.get(6)+newline+parts[0]);
 		    		}
-		    		else if(len == 2){ ////если были кривые ';'
+		    		else if(len == 2){ ////ГҐГ±Г«ГЁ ГЎГ»Г«ГЁ ГЄГ°ГЁГўГ»ГҐ ';'
 			    		T2row row = tab2.get(tab2.size()-1);
 			    		row.set(6, row.get(6)+newline+parts[0]+newline+parts[1]);		
 		    		}
-		    		else{ // если вообще ничего не распарсить на строке
+		    		else{ // ГҐГ±Г«ГЁ ГўГ®Г®ГЎГ№ГҐ Г­ГЁГ·ГҐГЈГ® Г­ГҐ Г°Г Г±ГЇГ Г°Г±ГЁГІГј Г­Г  Г±ГІГ°Г®ГЄГҐ
 		    			System.out.println("Can't parse: "+line);
 		    		}
 		    	}
 		    	else{
-		    		//если продолжение 6 столбца на другой строке
+		    		//ГҐГ±Г«ГЁ ГЇГ°Г®Г¤Г®Г«Г¦ГҐГ­ГЁГҐ 6 Г±ГІГ®Г«ГЎГ¶Г  Г­Г  Г¤Г°ГіГЈГ®Г© Г±ГІГ°Г®ГЄГҐ
 		    		if(parts[0].equals("") && parts[1].equals("") && !parts[6].equals("")){
 			    		T2row row = tab2.get(tab2.size()-1);
 			    		row.set(6, row.get(6)+newline+parts[6]);
 		    		}
-		    		else{ // если всё нормально
+		    		else{ // ГҐГ±Г«ГЁ ГўГ±Вё Г­Г®Г°Г¬Г Г«ГјГ­Г®
 			    		T2row row = new T2row();
 			    		for(int i=0; i<7; ++i){
 			    			row.set(i, parts[i]);
