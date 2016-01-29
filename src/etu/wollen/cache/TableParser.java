@@ -75,7 +75,7 @@ public class TableParser {
 	private ArrayList<T1row> tab1 = null;
 	private static ArrayList<T2row> tab2 = null;
 	
-	final static String newline = " ";
+	final static String newline = "<BR>";
 	
 	public TableParser(DBConnector db){
 		this.db = db;
