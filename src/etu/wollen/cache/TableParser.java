@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-//ñòðîêà òàáëèöû xls (àáñòðàêòíûé êëàññ)
+//xlsx table row (abstract)
 abstract class Txrow {
 	private int size;
 	private String[] fld;
@@ -14,36 +14,35 @@ abstract class Txrow {
 		fld = new String[size];
 	}
 	
-	public String get(int i){
+	public String get(int i) throws IndexOutOfBoundsException{
 		if(i < 0 || i >= size){
-			return null;
+			throw new IndexOutOfBoundsException("Field index out of range");
 		}
 		return fld[i];
 	}
 	
-	public void set(int i, String str){
+	public void set(int i, String str) throws IndexOutOfBoundsException{
 		if(i < 0 || i >= size){
-			System.out.println("Field index out of range");
-			return;
+			throw new IndexOutOfBoundsException("Field index out of range");
 		}
 		fld[i] = str;
 	}
 }
 
-//ñòðîêà 1 òàáëèöû
+//row of 1st table
 class T1row extends Txrow{
 	/*
-	 * 0 = íîìåð ï/ï
-	 * 1 = ðåã íîìåð
-	 * 2 = ôèî
-	 * 3 = íîìåð ýïèçîäà
-	 * 4 = êîä ìåä óñëóãè
-	 * 5 = óñëóãà
-	 * 6 = íàèìåíîâàíèå òåñòà
-	 * 7 = ïîíÿòèå (ðåçóëüòàò)
-	 * 8 = åäèíèöà èçìåðåíèÿ
-	 * 9 = äàòà âûïîëíåíèÿ
-	 * 10 = âðåìÿ âûïîëíåíèÿ
+	 * 0 = count number
+	 * 1 = reg number
+	 * 2 = FIO
+	 * 3 = episode number
+	 * 4 = med code
+	 * 5 = service
+	 * 6 = name of rest
+	 * 7 = result
+	 * 8 = measurement units
+	 * 9 = date
+	 * 10 = time
 	 */
 	public final static int size = 11;
 	public T1row(){
@@ -51,16 +50,16 @@ class T1row extends Txrow{
 	}
 }
 
-//ñòðîêà 2 òàáëèöû
+// row of 2nd table
 class T2row extends Txrow{
 	/*
-	 * 0 = íîìåð ï/ï
-	 * 1 = ðåã íîìåð
-	 * 2 = ôèî
-	 * 3 = íîìåð ìåä êàðòû
-	 * 4 = ñòàòóñ
-	 * 5 = äàòà âûïîëíåíèÿ
-	 * 6 = äàííûå
+	 * 0 = count number
+	 * 1 = reg number
+	 * 2 = FIO
+	 * 3 = med card number
+	 * 4 = status
+	 * 5 = date
+	 * 6 = data
 	 */
 	public final static int size = 7;
 	public T2row(){
@@ -94,7 +93,7 @@ public class TableParser {
 	public void parse(String table1, String table2) throws Exception{
 		BufferedReader br = null;
 		try {
-			//÷èòàåì ïåðâóþ òàáëèöó
+			//read 1st table
 			br = new BufferedReader(new FileReader(table1));
 		    String line = br.readLine();
 		    line = br.readLine();
@@ -102,15 +101,15 @@ public class TableParser {
 		    	String[] parts = line.split(";");
 		    	int len = parts.length;
 		    	if(len < 11){
-		    		if(len == 8){ //åñëè ïðîäîëæåíèå 7 ñòîëáöà íà äðóãîé ñòðîêå
+		    		if(len == 8){ //if 7th column continues at the next row
 			    		T1row row = tab1.get(tab1.size()-1);
 			    		row.set(7, row.get(7)+newline+parts[7]);
 		    		}
-		    		else{  //åñëè òàì âîîáùå íè÷åãî íå ðàñïàðñèòü íà ñòðîêå
+		    		else{  //if can't parse this row
 		    			System.out.println("Can't parse: "+line);
 		    		}
 		    	}
-		    	else{ // åñëè âñ¸ íîðìàëüíî
+		    	else{ // if ok
 		    		T1row row = new T1row();
 		    		for(int i=0; i<11; ++i){
 		    			row.set(i, parts[i]);
@@ -121,7 +120,7 @@ public class TableParser {
 		    }
 		    br.close();
 		    
-		    //÷èòàåì âòîðóþ òàáëèöó
+		    //read 2nd table
 			br = new BufferedReader(new FileReader(table2));
 		    line = br.readLine();
 		    line = br.readLine();
@@ -129,25 +128,25 @@ public class TableParser {
 		    	String[] parts = line.split(";");
 		    	int len = parts.length;
 		    	if(len < 7){ 
-		    		if(len == 1){ //åñëè áûëè êðèâûå ';'
+		    		if(len == 1){ //if were wrong ';'
 			    		T2row row = tab2.get(tab2.size()-1);
 			    		row.set(6, row.get(6)+newline+parts[0]);
 		    		}
-		    		else if(len == 2){ ////åñëè áûëè êðèâûå ';'
+		    		else if(len == 2){ //if were wrong ';'
 			    		T2row row = tab2.get(tab2.size()-1);
 			    		row.set(6, row.get(6)+newline+parts[0]+newline+parts[1]);		
 		    		}
-		    		else{ // åñëè âîîáùå íè÷åãî íå ðàñïàðñèòü íà ñòðîêå
+		    		else{ //if can't parse this row
 		    			System.out.println("Can't parse: "+line);
 		    		}
 		    	}
 		    	else{
-		    		//åñëè ïðîäîëæåíèå 6 ñòîëáöà íà äðóãîé ñòðîêå
+		    		//if 6th column continues at the next row
 		    		if(parts[0].equals("") && parts[1].equals("") && !parts[6].equals("")){
 			    		T2row row = tab2.get(tab2.size()-1);
 			    		row.set(6, row.get(6)+newline+parts[6]);
 		    		}
-		    		else{ // åñëè âñ¸ íîðìàëüíî
+		    		else{ // if ok
 			    		T2row row = new T2row();
 			    		for(int i=0; i<7; ++i){
 			    			row.set(i, parts[i]);

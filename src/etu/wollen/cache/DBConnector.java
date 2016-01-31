@@ -105,7 +105,7 @@ public class DBConnector {
 	}
 	
 	private Test createTest(String anName, String result, String mesUn, Patient patient) throws CacheException{
-		//Органолептический критерий
+		//Organoliptic
 		if(mesUn.equals("???")){
 			OrganolepticCriterium test = new OrganolepticCriterium(dbcon);
 			test.setNameOfTest(anName);
@@ -114,7 +114,7 @@ public class DBConnector {
 			test.setResult(result);
 			return test;
 		}
-		//Численный критерий
+		//Numeric
 		else{
 			NumericCriterium test = new NumericCriterium(dbcon);
 			test.setNameOfTest(anName);
@@ -132,7 +132,7 @@ public class DBConnector {
 	}
 	
 	public void upload(ArrayList<T1row> tab1, ArrayList<T2row> tab2){
-		//загружаем всех пациентов из базы данных
+		//load all patients from database
 		List<Patient> pats;
 		try {
 			pats = getAllPatients();
@@ -143,7 +143,7 @@ public class DBConnector {
 		}
 		
 		try {
-			//обрабатываем 1 таблицу
+			//processing 1st table
 			for(int i=0; i<tab1.size(); ++i){
 				T1row row = tab1.get(i);
 				String regNumber = row.get(1);
@@ -158,23 +158,23 @@ public class DBConnector {
 				Time time = parseTime(row.get(10));
 				Patient patient = patientExists(regNumber, pats);
 				if(patient != null){
-					//пациент уже существует
+					//patient exists
 					Episode ep = episodeExists(epNumber, patient.getEpisodes().asList());
 					if(ep != null){
-						//эпизод уже существует
+						//episode exists
 						Analysis an = analysisExists(serviceCode, ep.getAnalyses().asList());
 						if(an != null){
-							//анализ уже существует
+							//analysis exists
 							Test test = testExists(anName, an.getTests().asList());
 							if(test == null){
-								//тест ещё не существует
-								//новый тест
+								//test doesn't exist
+								//new test
 								Test test1 = createTest(anName, result, mesUn, patient);
 								an.getTests().asList().add(test1);
 							}
 						}
 						else{
-							//новый анализ
+							//new analysis
 							Analysis an1 = new Analysis(dbcon);
 							an1.setServiceCode(serviceCode);
 							an1.setServiceName(serviceName);
@@ -182,18 +182,18 @@ public class DBConnector {
 							an1.setmTime(time);
 							ep.getAnalyses().asList().add(an1);
 							
-							//новый тест
+							//new test
 							Test test = createTest(anName, result, mesUn, patient);
 							an1.getTests().asList().add(test);
 						}
 					}
 					else{
-						//новый эпизод
+						//new episode
 						ep = new Episode(dbcon);
 						patient.getEpisodes().asList().add(ep);
 						ep.setEpisodeNumber(epNumber);
 						
-						//новый анализ
+						//new analysis
 						Analysis an1 = new Analysis(dbcon);
 						an1.setServiceCode(serviceCode);
 						an1.setServiceName(serviceName);
@@ -201,25 +201,25 @@ public class DBConnector {
 						an1.setmTime(time);
 						ep.getAnalyses().asList().add(an1);
 						
-						//новый тест
+						//new test
 						Test test = createTest(anName, result, mesUn, patient);
 						an1.getTests().asList().add(test);
 					}
 				}
 				else{
-					//новый пациент
+					//new patient
 					patient = new Patient(dbcon);
 					pats.add(patient);
 					patient.setFIO(fio);
 					patient.setMedCardNumber("");
 					patient.setRegNumber(regNumber);
 					
-					//новый эпизод
+					//new episode
 					Episode ep = new Episode(dbcon);
 					patient.getEpisodes().asList().add(ep);
 					ep.setEpisodeNumber(epNumber);
 					
-					//новый анализ
+					//new analysis
 					Analysis an1 = new Analysis(dbcon);
 					an1.setServiceCode(serviceCode);
 					an1.setServiceName(serviceName);
@@ -227,14 +227,14 @@ public class DBConnector {
 					an1.setmTime(time);
 					ep.getAnalyses().asList().add(an1);
 					
-					//новый тест
+					//new test
 					Test test = createTest(anName, result, mesUn, patient);
 					an1.getTests().asList().add(test);
 				}
 			}
 			System.out.println("upload 1 table - OK");
 			
-			// обрабатываем 2 таблицу
+			// processing 2nd table
 			for(int i=0; i<tab2.size(); ++i){
 				T2row row = tab2.get(i);
 				String regNumber = row.get(1);
@@ -253,7 +253,7 @@ public class DBConnector {
 					
 					Epicrisis d = diaryExists(data, patient.getEpicrises().asList());
 					if(d == null){
-						//новая запись, если такой ещё не существует
+						//new entry if doesn't exist
 						Epicrisis diary = new Epicrisis(dbcon);
 						diary.setData(data);
 						diary.setmDate(mDate);
@@ -263,14 +263,14 @@ public class DBConnector {
 					
 				}
 				else{
-					//новый пациент
+					//new patient
 					patient = new Patient(dbcon);
 					pats.add(patient);
 					patient.setFIO(fio);
 					patient.setMedCardNumber(medCardNumber);
 					patient.setRegNumber(regNumber);
 					
-					//новая запись
+					//new diary
 					Epicrisis diary = new Epicrisis(dbcon);
 					diary.setData(data);
 					diary.setmDate(mDate);
@@ -310,6 +310,7 @@ public class DBConnector {
 	
 	public void deleteBD(){
 		try {
+			//kill all globals
 			NumericCriterium.sys_KillExtent(dbcon);
 			OrganolepticCriterium.sys_KillExtent(dbcon);
 			Test.sys_KillExtent(dbcon);
@@ -318,7 +319,8 @@ public class DBConnector {
 			Epicrisis.sys_KillExtent(dbcon);
 			Patient.sys_KillExtent(dbcon);
 			
-			connect(); //reconnect
+			//reconnect
+			connect();
 			System.out.println("CLEAR BD - OK");
 		} catch (CacheException e) {
 			e.printStackTrace();
