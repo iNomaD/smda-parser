@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class Epicrisis extends com.intersys.classes.Persistent {
-    private static final long serialVersionUID = 5143;
+    private static final long serialVersionUID = 7254;
     private static String CACHE_CLASS_NAME = "smda.Epicrisis";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).
@@ -643,7 +643,7 @@ public class Epicrisis extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>Data</code>.
-       <Description>
+       <p>Description: Содержание заметки</p>
        @return current value of <code>Data</code> represented as
        <code>java.lang.String</code>
 
@@ -657,7 +657,7 @@ public class Epicrisis extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>Data</code>.
-       <Description>
+       <p>Description: Содержание заметки</p>
        @param value new value to be set represented as
        <code>java.lang.String</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -669,11 +669,44 @@ public class Epicrisis extends com.intersys.classes.Persistent {
         return;
     }
 
+    public static void checkEpisodeValid (com.intersys.objects.Database db) throws com.intersys.objects.CacheException {
+    }
+    /**
+       Returns value of property <code>Episode</code>.
+       <p>Description: Эпизод, в котором был написан эпикриз (если известно)</p>
+       @return current value of <code>Episode</code> represented as
+       <code>smda.Episode</code>
+
+       @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Epicrisis#Episode"> Episode</A>
+    */
+    public smda.Episode getEpisode()  throws com.intersys.objects.CacheException {
+       com.intersys.cache.Dataholder dh = mInternal.getProperty("Episode",true);
+        com.intersys.cache.CacheObject cobj = dh.getCacheObject();
+        if (cobj == null)
+            return null;
+        return (smda.Episode)(cobj.newJavaInstance());
+    }
+
+    /**
+       Sets new value for <code>Episode</code>.
+       <p>Description: Эпизод, в котором был написан эпикриз (если известно)</p>
+       @param value new value to be set represented as
+       <code>smda.Episode</code>.
+       @throws com.intersys.objects.CacheException if any error occurred during value setting.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Epicrisis#Episode"> Episode</A>
+    */
+    public void setEpisode(smda.Episode value)  throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
+        mInternal.setProperty("Episode", dh);
+        return;
+    }
+
     public static void checkPatientValid (com.intersys.objects.Database db) throws com.intersys.objects.CacheException {
     }
     /**
        Returns value of property <code>Patient</code>.
-       <Description>
+       <p>Description: Пациент, к которому относится эпикриз</p>
        @return current value of <code>Patient</code> represented as
        <code>smda.Patient</code>
 
@@ -690,7 +723,7 @@ public class Epicrisis extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>Patient</code>.
-       <Description>
+       <p>Description: Пациент, к которому относится эпикриз</p>
        @param value new value to be set represented as
        <code>smda.Patient</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -706,7 +739,8 @@ public class Epicrisis extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>Status</code>.
-       <Description>
+       <p>Description: Статус: *АНАМНЕЗ* или ВЫПИСНОЙ_ЭПИКРИЗ или ДИАГНОЗ* или ДНЕВНИК или ЖАЛОБЫ 
+или *МАГНИТНО* или *ЭКГ* или РЕКОМЕНДАЦИИ или *ОСМОТР* или ЭХО*</p>
        @return current value of <code>Status</code> represented as
        <code>java.lang.String</code>
 
@@ -720,7 +754,8 @@ public class Epicrisis extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>Status</code>.
-       <Description>
+       <p>Description: Статус: *АНАМНЕЗ* или ВЫПИСНОЙ_ЭПИКРИЗ или ДИАГНОЗ* или ДНЕВНИК или ЖАЛОБЫ 
+или *МАГНИТНО* или *ЭКГ* или РЕКОМЕНДАЦИИ или *ОСМОТР* или ЭХО*</p>
        @param value new value to be set represented as
        <code>java.lang.String</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -736,7 +771,7 @@ public class Epicrisis extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>mDate</code>.
-       <Description>
+       <p>Description: Дата составления</p>
        @return current value of <code>mDate</code> represented as
        <code>java.sql.Date</code>
 
@@ -750,7 +785,7 @@ public class Epicrisis extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>mDate</code>.
-       <Description>
+       <p>Description: Дата составления</p>
        @param value new value to be set represented as
        <code>java.sql.Date</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -1241,6 +1276,94 @@ after the index filing is completed.
         return res.getString();
     }
     /**
+     <p>Runs method EpisodeGetObject in Cache.</p>
+     default argument force set to 0
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see #EpisodeGetObject(java.lang.Integer)
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Epicrisis#EpisodeGetObject"> Method EpisodeGetObject</A>
+    */
+    public com.intersys.objects.Oid EpisodeGetObject () throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[0];
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("EpisodeGetObject",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getOid();
+    }
+    /**
+     <p>Runs method EpisodeGetObject in Cache.</p>
+     @param force represented as java.lang.Integer
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Epicrisis#EpisodeGetObject"> Method EpisodeGetObject</A>
+    */
+    public com.intersys.objects.Oid EpisodeGetObject (java.lang.Integer force) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(force);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("EpisodeGetObject",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getOid();
+    }
+    /**
+     <p>Runs method EpisodeGetObjectId in Cache.</p>
+     default argument force set to 0
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see #EpisodeGetObjectId(java.lang.Integer)
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Epicrisis#EpisodeGetObjectId"> Method EpisodeGetObjectId</A>
+    */
+    public java.lang.String EpisodeGetObjectId () throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[0];
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("EpisodeGetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method EpisodeGetObjectId in Cache.</p>
+     @param force represented as java.lang.Integer
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Epicrisis#EpisodeGetObjectId"> Method EpisodeGetObjectId</A>
+    */
+    public java.lang.String EpisodeGetObjectId (java.lang.Integer force) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(force);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("EpisodeGetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method EpisodeIsValid in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param value represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Epicrisis#EpisodeIsValid"> Method EpisodeIsValid</A>
+    */
+    public static void EpisodeIsValid (com.intersys.objects.Database db, java.lang.String value) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(value);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"EpisodeIsValid",args,com.intersys.objects.Database.RET_PRIM);
+        db.parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method EpisodeSetObject in Cache.</p>
+     @param newvalue represented as com.intersys.objects.Oid
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Epicrisis#EpisodeSetObject"> Method EpisodeSetObject</A>
+    */
+    public void EpisodeSetObject (com.intersys.objects.Oid newvalue) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(newvalue);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("EpisodeSetObject",args,com.intersys.objects.Database.RET_PRIM);
+        getDatabase().parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method EpisodeSetObjectId in Cache.</p>
+     @param newid represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Epicrisis#EpisodeSetObjectId"> Method EpisodeSetObjectId</A>
+    */
+    public void EpisodeSetObjectId (java.lang.String newid) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(newid);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("EpisodeSetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        getDatabase().parseStatus(res);
+        return;
+    }
+    /**
      <p>Runs method IDKEYDelete in Cache.</p>
      @param db represented as com.intersys.objects.Database
      @param K1 represented as java.lang.String
@@ -1577,7 +1700,7 @@ after the index filing is completed.
         return new com.intersys.objects.CacheQuery(db, "smda.Epicrisis_Extent", 0, 0);
     }
 
-    public static Object addToBatchInsert (Object batch, java.sql.Connection con, String cos_Data, Integer cos_Patient, String cos_Status, java.sql.Date cos_mDate) throws java.sql.SQLException {
+    public static Object addToBatchInsert (Object batch, java.sql.Connection con, String cos_Data, Integer cos_Episode, Integer cos_Patient, String cos_Status, java.sql.Date cos_mDate) throws java.sql.SQLException {
         if (batch == null) {
             com.intersys.jdbc.CacheConnection c = null;
             if (con != null) {
@@ -1590,8 +1713,9 @@ after the index filing is completed.
             batch = new com.intersys.jdbc.QuickStatement.Batch (c.getConnectionInfo ());
         }
         com.intersys.jdbc.QuickStatement.Batch qbatch = (com.intersys.jdbc.QuickStatement.Batch) batch;
-        com.intersys.jdbc.SysListProxy.setInteger (qbatch.list, 5); // number of columns
+        com.intersys.jdbc.SysListProxy.setInteger (qbatch.list, 6); // number of columns
         com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_Data);
+        com.intersys.jdbc.SysListProxy.setIntegerWrapper(qbatch.list, cos_Episode);
         com.intersys.jdbc.SysListProxy.setIntegerWrapper(qbatch.list, cos_Patient);
         com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_Status);
         com.intersys.jdbc.SysListProxy.setSQLDate(qbatch.list, cos_mDate);

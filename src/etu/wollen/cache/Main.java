@@ -14,7 +14,7 @@ public class Main {
 		try{
 			parser.clearBD();
 			parser.parse(table1, table2);
-			parser.upload();
+			//parser.upload();
 			
 			/* ÂÛÂÅÑÒÈ ÂÒÎĞÓŞ ÒÀÁËÈÖÓ ÏÎÑËÅ ÒÎÃÎ ÊÀÊ ĞÀÑÏÀĞÑÈËÈ
 			for(T2row row : tab2){

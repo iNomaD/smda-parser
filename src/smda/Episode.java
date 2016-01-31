@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class Episode extends com.intersys.classes.Persistent {
-    private static final long serialVersionUID = 4308;
+    private static final long serialVersionUID = 4646;
     private static String CACHE_CLASS_NAME = "smda.Episode";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).
@@ -643,7 +643,7 @@ public class Episode extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>Analyses</code>.
-       <Description>
+       <p>Description: Анализы, которые относятся к данному эпизоду</p>
        @return current value of <code>Analyses</code> represented as
        <code>com.intersys.classes.RelationshipObject</code>
 
@@ -662,7 +662,7 @@ public class Episode extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>Doctor</code>.
-       <Description>
+       <p>Description: Лечащий врач</p>
        @return current value of <code>Doctor</code> represented as
        <code>java.lang.String</code>
 
@@ -676,7 +676,7 @@ public class Episode extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>Doctor</code>.
-       <Description>
+       <p>Description: Лечащий врач</p>
        @param value new value to be set represented as
        <code>java.lang.String</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -692,7 +692,7 @@ public class Episode extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>EndDate</code>.
-       <Description>
+       <p>Description: Дата окончания эпизода</p>
        @return current value of <code>EndDate</code> represented as
        <code>java.lang.String</code>
 
@@ -706,7 +706,7 @@ public class Episode extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>EndDate</code>.
-       <Description>
+       <p>Description: Дата окончания эпизода</p>
        @param value new value to be set represented as
        <code>java.lang.String</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -722,7 +722,7 @@ public class Episode extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>EpisodeNumber</code>.
-       <Description>
+       <p>Description: Номер эпизода</p>
        @return current value of <code>EpisodeNumber</code> represented as
        <code>java.lang.String</code>
 
@@ -736,7 +736,7 @@ public class Episode extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>EpisodeNumber</code>.
-       <Description>
+       <p>Description: Номер эпизода</p>
        @param value new value to be set represented as
        <code>java.lang.String</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -752,7 +752,7 @@ public class Episode extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>Patient</code>.
-       <Description>
+       <p>Description: Пациент, к которому относится эпизод</p>
        @return current value of <code>Patient</code> represented as
        <code>smda.Patient</code>
 
@@ -769,7 +769,7 @@ public class Episode extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>Patient</code>.
-       <Description>
+       <p>Description: Пациент, к которому относится эпизод</p>
        @param value new value to be set represented as
        <code>smda.Patient</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -785,7 +785,7 @@ public class Episode extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>StartDate</code>.
-       <Description>
+       <p>Description: Дата начала эпизода</p>
        @return current value of <code>StartDate</code> represented as
        <code>java.lang.String</code>
 
@@ -799,7 +799,7 @@ public class Episode extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>StartDate</code>.
-       <Description>
+       <p>Description: Дата начала эпизода</p>
        @param value new value to be set represented as
        <code>java.lang.String</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.

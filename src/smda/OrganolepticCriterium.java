@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class OrganolepticCriterium extends smda.Test {
-    private static final long serialVersionUID = 4112;
+    private static final long serialVersionUID = 3656;
     private static String CACHE_CLASS_NAME = "smda.OrganolepticCriterium";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).
@@ -639,36 +639,6 @@ public class OrganolepticCriterium extends smda.Test {
     public static void checkAllMethods(com.intersys.objects.Database db ) throws com.intersys.objects.CacheException {
         checkAllMethods(db, CACHE_CLASS_NAME, OrganolepticCriterium.class);
     }
-    public static void checkResultValid (com.intersys.objects.Database db) throws com.intersys.objects.CacheException {
-    }
-    /**
-       Returns value of property <code>Result</code>.
-       <Description>
-       @return current value of <code>Result</code> represented as
-       <code>java.lang.String</code>
-
-       @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
-       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.OrganolepticCriterium#Result"> Result</A>
-    */
-    public java.lang.String getResult()  throws com.intersys.objects.CacheException {
-       com.intersys.cache.Dataholder dh = mInternal.getProperty("Result",false);
-       return dh.getString();
-    }
-
-    /**
-       Sets new value for <code>Result</code>.
-       <Description>
-       @param value new value to be set represented as
-       <code>java.lang.String</code>.
-       @throws com.intersys.objects.CacheException if any error occurred during value setting.
-       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.OrganolepticCriterium#Result"> Result</A>
-    */
-    public void setResult(java.lang.String value)  throws com.intersys.objects.CacheException {
-        com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
-        mInternal.setProperty("Result", dh);
-        return;
-    }
-
     /**
      <p>Runs method %ClassName in Cache.</p>
      <p>Description: Returns the object's class name. The <var>fullname</var> determines how the
@@ -1170,46 +1140,6 @@ after the index filing is completed.
         return (smda.Test)(cobj.newJavaInstance());
     }
     /**
-     <p>Runs method ResultDisplayToLogical in Cache.</p>
-     @param db represented as com.intersys.objects.Database
-     @param _val represented as java.lang.String
-     @throws com.intersys.objects.CacheException if any error occured while running the method.
-     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.OrganolepticCriterium#ResultDisplayToLogical"> Method ResultDisplayToLogical</A>
-    */
-    public static java.lang.String ResultDisplayToLogical (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
-        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
-        args[0] = new com.intersys.cache.Dataholder(_val);
-        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"ResultDisplayToLogical",args,com.intersys.objects.Database.RET_PRIM);
-        return res.getString();
-    }
-    /**
-     <p>Runs method ResultIsValid in Cache.</p>
-     @param db represented as com.intersys.objects.Database
-     @param _val represented as java.lang.String
-     @throws com.intersys.objects.CacheException if any error occured while running the method.
-     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.OrganolepticCriterium#ResultIsValid"> Method ResultIsValid</A>
-    */
-    public static void ResultIsValid (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
-        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
-        args[0] = new com.intersys.cache.Dataholder(_val);
-        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"ResultIsValid",args,com.intersys.objects.Database.RET_PRIM);
-        db.parseStatus(res);
-        return;
-    }
-    /**
-     <p>Runs method ResultLogicalToDisplay in Cache.</p>
-     @param db represented as com.intersys.objects.Database
-     @param _val represented as java.lang.String
-     @throws com.intersys.objects.CacheException if any error occured while running the method.
-     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.OrganolepticCriterium#ResultLogicalToDisplay"> Method ResultLogicalToDisplay</A>
-    */
-    public static java.lang.String ResultLogicalToDisplay (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
-        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
-        args[0] = new com.intersys.cache.Dataholder(_val);
-        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"ResultLogicalToDisplay",args,com.intersys.objects.Database.RET_PRIM);
-        return res.getString();
-    }
-    /**
      <p>Returns a CallableStatement for query Extent.</p>
      @param db represented as com.intersys.objects.Database
      @throws com.intersys.objects.CacheException if any error occured while running the method.
@@ -1218,7 +1148,7 @@ after the index filing is completed.
         return new com.intersys.objects.CacheQuery(db, "smda.OrganolepticCriterium_Extent", 0, 0);
     }
 
-    public static Object addToBatchInsert (Object batch, java.sql.Connection con, String cos_NameOfTest, String cos_Result) throws java.sql.SQLException {
+    public static Object addToBatchInsert (Object batch, java.sql.Connection con, Integer cos_Analysis, String cos_MesurementUnits, String cos_NameOfTest, Double cos_NumericResult, Integer cos_Patient, String cos_Result, String cos_TypeOfTest) throws java.sql.SQLException {
         if (batch == null) {
             com.intersys.jdbc.CacheConnection c = null;
             if (con != null) {
@@ -1231,9 +1161,14 @@ after the index filing is completed.
             batch = new com.intersys.jdbc.QuickStatement.Batch (c.getConnectionInfo ());
         }
         com.intersys.jdbc.QuickStatement.Batch qbatch = (com.intersys.jdbc.QuickStatement.Batch) batch;
-        com.intersys.jdbc.SysListProxy.setInteger (qbatch.list, 3); // number of columns
+        com.intersys.jdbc.SysListProxy.setInteger (qbatch.list, 8); // number of columns
+        com.intersys.jdbc.SysListProxy.setIntegerWrapper(qbatch.list, cos_Analysis);
+        com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_MesurementUnits);
         com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_NameOfTest);
+        com.intersys.jdbc.SysListProxy.setDoubleWrapper(qbatch.list, cos_NumericResult);
+        com.intersys.jdbc.SysListProxy.setIntegerWrapper(qbatch.list, cos_Patient);
         com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_Result);
+        com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_TypeOfTest);
         com.intersys.jdbc.SysListProxy.setUndefined(qbatch.list); // for x__classname
         qbatch.flushRecord ();
         return qbatch;

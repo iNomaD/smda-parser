@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class Patient extends com.intersys.classes.Persistent {
-    private static final long serialVersionUID = 6634;
+    private static final long serialVersionUID = 4590;
     private static String CACHE_CLASS_NAME = "smda.Patient";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).
@@ -643,7 +643,7 @@ public class Patient extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>BirthDate</code>.
-       <Description>
+       <p>Description: Дата рождения</p>
        @return current value of <code>BirthDate</code> represented as
        <code>java.sql.Date</code>
 
@@ -657,7 +657,7 @@ public class Patient extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>BirthDate</code>.
-       <Description>
+       <p>Description: Дата рождения</p>
        @param value new value to be set represented as
        <code>java.sql.Date</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -673,7 +673,7 @@ public class Patient extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>Epicrises</code>.
-       <Description>
+       <p>Description: Эпикризы, написанные о состоянии данного пациента</p>
        @return current value of <code>Epicrises</code> represented as
        <code>com.intersys.classes.RelationshipObject</code>
 
@@ -692,7 +692,7 @@ public class Patient extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>Episodes</code>.
-       <Description>
+       <p>Description: Эпизоды, относящиеся к пациенту</p>
        @return current value of <code>Episodes</code> represented as
        <code>com.intersys.classes.RelationshipObject</code>
 
@@ -711,7 +711,7 @@ public class Patient extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>FIO</code>.
-       <Description>
+       <p>Description: ФИО</p>
        @return current value of <code>FIO</code> represented as
        <code>java.lang.String</code>
 
@@ -725,7 +725,7 @@ public class Patient extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>FIO</code>.
-       <Description>
+       <p>Description: ФИО</p>
        @param value new value to be set represented as
        <code>java.lang.String</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -741,7 +741,7 @@ public class Patient extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>MedCardNumber</code>.
-       <Description>
+       <p>Description: Номер мед. карты</p>
        @return current value of <code>MedCardNumber</code> represented as
        <code>java.lang.String</code>
 
@@ -755,7 +755,7 @@ public class Patient extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>MedCardNumber</code>.
-       <Description>
+       <p>Description: Номер мед. карты</p>
        @param value new value to be set represented as
        <code>java.lang.String</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -771,7 +771,7 @@ public class Patient extends com.intersys.classes.Persistent {
     }
     /**
        Returns value of property <code>RegNumber</code>.
-       <Description>
+       <p>Description: Регистрационный номер</p>
        @return current value of <code>RegNumber</code> represented as
        <code>java.lang.String</code>
 
@@ -785,7 +785,7 @@ public class Patient extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>RegNumber</code>.
-       <Description>
+       <p>Description: Регистрационный номер</p>
        @param value new value to be set represented as
        <code>java.lang.String</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.

@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class Test extends com.intersys.classes.Persistent {
-    private static final long serialVersionUID = 4799;
+    private static final long serialVersionUID = 1326;
     private static String CACHE_CLASS_NAME = "smda.Test";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).
@@ -639,11 +639,74 @@ public class Test extends com.intersys.classes.Persistent {
     public static void checkAllMethods(com.intersys.objects.Database db ) throws com.intersys.objects.CacheException {
         checkAllMethods(db, CACHE_CLASS_NAME, Test.class);
     }
+    public static void checkAnalysisValid (com.intersys.objects.Database db) throws com.intersys.objects.CacheException {
+    }
+    /**
+       Returns value of property <code>Analysis</code>.
+       <p>Description: Анализ, в который входит данный тест</p>
+       @return current value of <code>Analysis</code> represented as
+       <code>smda.Analysis</code>
+
+       @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#Analysis"> Analysis</A>
+    */
+    public smda.Analysis getAnalysis()  throws com.intersys.objects.CacheException {
+       com.intersys.cache.Dataholder dh = mInternal.getProperty("Analysis",true);
+        com.intersys.cache.CacheObject cobj = dh.getCacheObject();
+        if (cobj == null)
+            return null;
+        return (smda.Analysis)(cobj.newJavaInstance());
+    }
+
+    /**
+       Sets new value for <code>Analysis</code>.
+       <p>Description: Анализ, в который входит данный тест</p>
+       @param value new value to be set represented as
+       <code>smda.Analysis</code>.
+       @throws com.intersys.objects.CacheException if any error occurred during value setting.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#Analysis"> Analysis</A>
+    */
+    public void setAnalysis(smda.Analysis value)  throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
+        mInternal.setProperty("Analysis", dh);
+        return;
+    }
+
+    public static void checkMesurementUnitsValid (com.intersys.objects.Database db) throws com.intersys.objects.CacheException {
+    }
+    /**
+       Returns value of property <code>MesurementUnits</code>.
+       <p>Description: Единицы измерения (для числовых)</p>
+       @return current value of <code>MesurementUnits</code> represented as
+       <code>java.lang.String</code>
+
+       @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#MesurementUnits"> MesurementUnits</A>
+    */
+    public java.lang.String getMesurementUnits()  throws com.intersys.objects.CacheException {
+       com.intersys.cache.Dataholder dh = mInternal.getProperty("MesurementUnits",false);
+       return dh.getString();
+    }
+
+    /**
+       Sets new value for <code>MesurementUnits</code>.
+       <p>Description: Единицы измерения (для числовых)</p>
+       @param value new value to be set represented as
+       <code>java.lang.String</code>.
+       @throws com.intersys.objects.CacheException if any error occurred during value setting.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#MesurementUnits"> MesurementUnits</A>
+    */
+    public void setMesurementUnits(java.lang.String value)  throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
+        mInternal.setProperty("MesurementUnits", dh);
+        return;
+    }
+
     public static void checkNameOfTestValid (com.intersys.objects.Database db) throws com.intersys.objects.CacheException {
     }
     /**
        Returns value of property <code>NameOfTest</code>.
-       <Description>
+       <p>Description: Наименование теста</p>
        @return current value of <code>NameOfTest</code> represented as
        <code>java.lang.String</code>
 
@@ -657,7 +720,7 @@ public class Test extends com.intersys.classes.Persistent {
 
     /**
        Sets new value for <code>NameOfTest</code>.
-       <Description>
+       <p>Description: Наименование теста</p>
        @param value new value to be set represented as
        <code>java.lang.String</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
@@ -666,6 +729,129 @@ public class Test extends com.intersys.classes.Persistent {
     public void setNameOfTest(java.lang.String value)  throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
         mInternal.setProperty("NameOfTest", dh);
+        return;
+    }
+
+    public static void checkNumericResultValid (com.intersys.objects.Database db) throws com.intersys.objects.CacheException {
+    }
+    /**
+       Returns value of property <code>NumericResult</code>.
+       <p>Description: Результат (для числовых)</p>
+       @return current value of <code>NumericResult</code> represented as
+       <code>java.lang.Double</code>
+
+       @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#NumericResult"> NumericResult</A>
+    */
+    public java.lang.Double getNumericResult()  throws com.intersys.objects.CacheException {
+       com.intersys.cache.Dataholder dh = mInternal.getProperty("NumericResult",false);
+       return dh.getDouble();
+    }
+
+    /**
+       Sets new value for <code>NumericResult</code>.
+       <p>Description: Результат (для числовых)</p>
+       @param value new value to be set represented as
+       <code>java.lang.Double</code>.
+       @throws com.intersys.objects.CacheException if any error occurred during value setting.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#NumericResult"> NumericResult</A>
+    */
+    public void setNumericResult(java.lang.Double value)  throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
+        mInternal.setProperty("NumericResult", dh);
+        return;
+    }
+
+    public static void checkPatientValid (com.intersys.objects.Database db) throws com.intersys.objects.CacheException {
+    }
+    /**
+       Returns value of property <code>Patient</code>.
+       <p>Description: Пациент, которому принадлежит тест</p>
+       @return current value of <code>Patient</code> represented as
+       <code>smda.Patient</code>
+
+       @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#Patient"> Patient</A>
+    */
+    public smda.Patient getPatient()  throws com.intersys.objects.CacheException {
+       com.intersys.cache.Dataholder dh = mInternal.getProperty("Patient",true);
+        com.intersys.cache.CacheObject cobj = dh.getCacheObject();
+        if (cobj == null)
+            return null;
+        return (smda.Patient)(cobj.newJavaInstance());
+    }
+
+    /**
+       Sets new value for <code>Patient</code>.
+       <p>Description: Пациент, которому принадлежит тест</p>
+       @param value new value to be set represented as
+       <code>smda.Patient</code>.
+       @throws com.intersys.objects.CacheException if any error occurred during value setting.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#Patient"> Patient</A>
+    */
+    public void setPatient(smda.Patient value)  throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
+        mInternal.setProperty("Patient", dh);
+        return;
+    }
+
+    public static void checkResultValid (com.intersys.objects.Database db) throws com.intersys.objects.CacheException {
+    }
+    /**
+       Returns value of property <code>Result</code>.
+       <p>Description: Результат (для органолептических)</p>
+       @return current value of <code>Result</code> represented as
+       <code>java.lang.String</code>
+
+       @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#Result"> Result</A>
+    */
+    public java.lang.String getResult()  throws com.intersys.objects.CacheException {
+       com.intersys.cache.Dataholder dh = mInternal.getProperty("Result",false);
+       return dh.getString();
+    }
+
+    /**
+       Sets new value for <code>Result</code>.
+       <p>Description: Результат (для органолептических)</p>
+       @param value new value to be set represented as
+       <code>java.lang.String</code>.
+       @throws com.intersys.objects.CacheException if any error occurred during value setting.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#Result"> Result</A>
+    */
+    public void setResult(java.lang.String value)  throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
+        mInternal.setProperty("Result", dh);
+        return;
+    }
+
+    public static void checkTypeOfTestValid (com.intersys.objects.Database db) throws com.intersys.objects.CacheException {
+    }
+    /**
+       Returns value of property <code>TypeOfTest</code>.
+       <p>Description: Тип теста (числовой/органолептический)</p>
+       @return current value of <code>TypeOfTest</code> represented as
+       <code>java.lang.String</code>
+
+       @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#TypeOfTest"> TypeOfTest</A>
+    */
+    public java.lang.String getTypeOfTest()  throws com.intersys.objects.CacheException {
+       com.intersys.cache.Dataholder dh = mInternal.getProperty("TypeOfTest",false);
+       return dh.getString();
+    }
+
+    /**
+       Sets new value for <code>TypeOfTest</code>.
+       <p>Description: Тип теста (числовой/органолептический)</p>
+       @param value new value to be set represented as
+       <code>java.lang.String</code>.
+       @throws com.intersys.objects.CacheException if any error occurred during value setting.
+       @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#TypeOfTest"> TypeOfTest</A>
+    */
+    public void setTypeOfTest(java.lang.String value)  throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
+        mInternal.setProperty("TypeOfTest", dh);
         return;
     }
 
@@ -1108,6 +1294,127 @@ after the index filing is completed.
         return;
     }
     /**
+     <p>Runs method AnalysisGetObject in Cache.</p>
+     default argument force set to 0
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see #AnalysisGetObject(java.lang.Integer)
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#AnalysisGetObject"> Method AnalysisGetObject</A>
+    */
+    public com.intersys.objects.Oid AnalysisGetObject () throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[0];
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("AnalysisGetObject",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getOid();
+    }
+    /**
+     <p>Runs method AnalysisGetObject in Cache.</p>
+     @param force represented as java.lang.Integer
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#AnalysisGetObject"> Method AnalysisGetObject</A>
+    */
+    public com.intersys.objects.Oid AnalysisGetObject (java.lang.Integer force) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(force);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("AnalysisGetObject",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getOid();
+    }
+    /**
+     <p>Runs method AnalysisGetObjectId in Cache.</p>
+     default argument force set to 0
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see #AnalysisGetObjectId(java.lang.Integer)
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#AnalysisGetObjectId"> Method AnalysisGetObjectId</A>
+    */
+    public java.lang.String AnalysisGetObjectId () throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[0];
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("AnalysisGetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method AnalysisGetObjectId in Cache.</p>
+     @param force represented as java.lang.Integer
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#AnalysisGetObjectId"> Method AnalysisGetObjectId</A>
+    */
+    public java.lang.String AnalysisGetObjectId (java.lang.Integer force) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(force);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("AnalysisGetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method AnalysisIndexExists in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param K1 represented as smda.Analysis
+     default argument id set to ""
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see #AnalysisIndexExists(com.intersys.objects.Database,smda.Analysis,com.intersys.objects.StringHolder)
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#AnalysisIndexExists"> Method AnalysisIndexExists</A>
+    */
+    public static java.lang.Boolean AnalysisIndexExists (com.intersys.objects.Database db, smda.Analysis K1) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(K1);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"AnalysisIndexExists",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getBoolean();
+    }
+    /**
+     <p>Runs method AnalysisIndexExists in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param K1 represented as smda.Analysis
+     @param id represented as com.intersys.objects.StringHolder
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#AnalysisIndexExists"> Method AnalysisIndexExists</A>
+    */
+    public static java.lang.Boolean AnalysisIndexExists (com.intersys.objects.Database db, smda.Analysis K1, com.intersys.objects.StringHolder id) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[2];
+        int[] _refs = new int[1];
+        args[0] = new com.intersys.cache.Dataholder(K1);
+        args[1] = com.intersys.cache.Dataholder.create (id.value);
+        _refs[0] = 2;
+        com.intersys.cache.Dataholder[] res=db.runClassMethod(CACHE_CLASS_NAME,"AnalysisIndexExists",_refs,args,com.intersys.objects.Database.RET_PRIM);
+        id.set(res[1].getString());
+        return res[0].getBoolean();
+    }
+    /**
+     <p>Runs method AnalysisIsValid in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param value represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#AnalysisIsValid"> Method AnalysisIsValid</A>
+    */
+    public static void AnalysisIsValid (com.intersys.objects.Database db, java.lang.String value) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(value);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"AnalysisIsValid",args,com.intersys.objects.Database.RET_PRIM);
+        db.parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method AnalysisSetObject in Cache.</p>
+     @param newvalue represented as com.intersys.objects.Oid
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#AnalysisSetObject"> Method AnalysisSetObject</A>
+    */
+    public void AnalysisSetObject (com.intersys.objects.Oid newvalue) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(newvalue);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("AnalysisSetObject",args,com.intersys.objects.Database.RET_PRIM);
+        getDatabase().parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method AnalysisSetObjectId in Cache.</p>
+     @param newid represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#AnalysisSetObjectId"> Method AnalysisSetObjectId</A>
+    */
+    public void AnalysisSetObjectId (java.lang.String newid) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(newid);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("AnalysisSetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        getDatabase().parseStatus(res);
+        return;
+    }
+    /**
      <p>Runs method IDKEYDelete in Cache.</p>
      @param db represented as com.intersys.objects.Database
      @param K1 represented as java.lang.String
@@ -1235,6 +1542,46 @@ after the index filing is completed.
         return (smda.Test)(cobj.newJavaInstance());
     }
     /**
+     <p>Runs method MesurementUnitsDisplayToLogical in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#MesurementUnitsDisplayToLogical"> Method MesurementUnitsDisplayToLogical</A>
+    */
+    public static java.lang.String MesurementUnitsDisplayToLogical (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"MesurementUnitsDisplayToLogical",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method MesurementUnitsIsValid in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#MesurementUnitsIsValid"> Method MesurementUnitsIsValid</A>
+    */
+    public static void MesurementUnitsIsValid (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"MesurementUnitsIsValid",args,com.intersys.objects.Database.RET_PRIM);
+        db.parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method MesurementUnitsLogicalToDisplay in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#MesurementUnitsLogicalToDisplay"> Method MesurementUnitsLogicalToDisplay</A>
+    */
+    public static java.lang.String MesurementUnitsLogicalToDisplay (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"MesurementUnitsLogicalToDisplay",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
      <p>Runs method NameOfTestDisplayToLogical in Cache.</p>
      @param db represented as com.intersys.objects.Database
      @param _val represented as java.lang.String
@@ -1275,6 +1622,214 @@ after the index filing is completed.
         return res.getString();
     }
     /**
+     <p>Runs method NumericResultDisplayToLogical in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#NumericResultDisplayToLogical"> Method NumericResultDisplayToLogical</A>
+    */
+    public static java.lang.Double NumericResultDisplayToLogical (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"NumericResultDisplayToLogical",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getDouble();
+    }
+    /**
+     <p>Runs method NumericResultIsValid in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#NumericResultIsValid"> Method NumericResultIsValid</A>
+    */
+    public static void NumericResultIsValid (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"NumericResultIsValid",args,com.intersys.objects.Database.RET_PRIM);
+        db.parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method NumericResultLogicalToDisplay in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.Double
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#NumericResultLogicalToDisplay"> Method NumericResultLogicalToDisplay</A>
+    */
+    public static java.lang.String NumericResultLogicalToDisplay (com.intersys.objects.Database db, java.lang.Double _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"NumericResultLogicalToDisplay",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method PatientGetObject in Cache.</p>
+     default argument force set to 0
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see #PatientGetObject(java.lang.Integer)
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#PatientGetObject"> Method PatientGetObject</A>
+    */
+    public com.intersys.objects.Oid PatientGetObject () throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[0];
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("PatientGetObject",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getOid();
+    }
+    /**
+     <p>Runs method PatientGetObject in Cache.</p>
+     @param force represented as java.lang.Integer
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#PatientGetObject"> Method PatientGetObject</A>
+    */
+    public com.intersys.objects.Oid PatientGetObject (java.lang.Integer force) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(force);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("PatientGetObject",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getOid();
+    }
+    /**
+     <p>Runs method PatientGetObjectId in Cache.</p>
+     default argument force set to 0
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see #PatientGetObjectId(java.lang.Integer)
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#PatientGetObjectId"> Method PatientGetObjectId</A>
+    */
+    public java.lang.String PatientGetObjectId () throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[0];
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("PatientGetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method PatientGetObjectId in Cache.</p>
+     @param force represented as java.lang.Integer
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#PatientGetObjectId"> Method PatientGetObjectId</A>
+    */
+    public java.lang.String PatientGetObjectId (java.lang.Integer force) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(force);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("PatientGetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method PatientIsValid in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param value represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#PatientIsValid"> Method PatientIsValid</A>
+    */
+    public static void PatientIsValid (com.intersys.objects.Database db, java.lang.String value) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(value);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"PatientIsValid",args,com.intersys.objects.Database.RET_PRIM);
+        db.parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method PatientSetObject in Cache.</p>
+     @param newvalue represented as com.intersys.objects.Oid
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#PatientSetObject"> Method PatientSetObject</A>
+    */
+    public void PatientSetObject (com.intersys.objects.Oid newvalue) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(newvalue);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("PatientSetObject",args,com.intersys.objects.Database.RET_PRIM);
+        getDatabase().parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method PatientSetObjectId in Cache.</p>
+     @param newid represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#PatientSetObjectId"> Method PatientSetObjectId</A>
+    */
+    public void PatientSetObjectId (java.lang.String newid) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(newid);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("PatientSetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        getDatabase().parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method ResultDisplayToLogical in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#ResultDisplayToLogical"> Method ResultDisplayToLogical</A>
+    */
+    public static java.lang.String ResultDisplayToLogical (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"ResultDisplayToLogical",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method ResultIsValid in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#ResultIsValid"> Method ResultIsValid</A>
+    */
+    public static void ResultIsValid (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"ResultIsValid",args,com.intersys.objects.Database.RET_PRIM);
+        db.parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method ResultLogicalToDisplay in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#ResultLogicalToDisplay"> Method ResultLogicalToDisplay</A>
+    */
+    public static java.lang.String ResultLogicalToDisplay (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"ResultLogicalToDisplay",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method TypeOfTestDisplayToLogical in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#TypeOfTestDisplayToLogical"> Method TypeOfTestDisplayToLogical</A>
+    */
+    public static java.lang.String TypeOfTestDisplayToLogical (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"TypeOfTestDisplayToLogical",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method TypeOfTestIsValid in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#TypeOfTestIsValid"> Method TypeOfTestIsValid</A>
+    */
+    public static void TypeOfTestIsValid (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"TypeOfTestIsValid",args,com.intersys.objects.Database.RET_PRIM);
+        db.parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method TypeOfTestLogicalToDisplay in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param _val represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Test#TypeOfTestLogicalToDisplay"> Method TypeOfTestLogicalToDisplay</A>
+    */
+    public static java.lang.String TypeOfTestLogicalToDisplay (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(_val);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"TypeOfTestLogicalToDisplay",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
      <p>Returns a CallableStatement for query Extent.</p>
      @param db represented as com.intersys.objects.Database
      @throws com.intersys.objects.CacheException if any error occured while running the method.
@@ -1283,7 +1838,7 @@ after the index filing is completed.
         return new com.intersys.objects.CacheQuery(db, "smda.Test_Extent", 0, 0);
     }
 
-    public static Object addToBatchInsert (Object batch, java.sql.Connection con, String cos_NameOfTest) throws java.sql.SQLException {
+    public static Object addToBatchInsert (Object batch, java.sql.Connection con, Integer cos_Analysis, String cos_MesurementUnits, String cos_NameOfTest, Double cos_NumericResult, Integer cos_Patient, String cos_Result, String cos_TypeOfTest) throws java.sql.SQLException {
         if (batch == null) {
             com.intersys.jdbc.CacheConnection c = null;
             if (con != null) {
@@ -1296,8 +1851,14 @@ after the index filing is completed.
             batch = new com.intersys.jdbc.QuickStatement.Batch (c.getConnectionInfo ());
         }
         com.intersys.jdbc.QuickStatement.Batch qbatch = (com.intersys.jdbc.QuickStatement.Batch) batch;
-        com.intersys.jdbc.SysListProxy.setInteger (qbatch.list, 2); // number of columns
+        com.intersys.jdbc.SysListProxy.setInteger (qbatch.list, 8); // number of columns
+        com.intersys.jdbc.SysListProxy.setIntegerWrapper(qbatch.list, cos_Analysis);
+        com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_MesurementUnits);
         com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_NameOfTest);
+        com.intersys.jdbc.SysListProxy.setDoubleWrapper(qbatch.list, cos_NumericResult);
+        com.intersys.jdbc.SysListProxy.setIntegerWrapper(qbatch.list, cos_Patient);
+        com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_Result);
+        com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_TypeOfTest);
         com.intersys.jdbc.SysListProxy.setUndefined(qbatch.list); // for x__classname
         qbatch.flushRecord ();
         return qbatch;

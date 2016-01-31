@@ -104,11 +104,13 @@ public class DBConnector {
 		return pats;
 	}
 	
-	private Test createTest(String anName, String result, String mesUn) throws CacheException{
+	private Test createTest(String anName, String result, String mesUn, Patient patient) throws CacheException{
 		//Органолептический критерий
 		if(mesUn.equals("???")){
 			OrganolepticCriterium test = new OrganolepticCriterium(dbcon);
 			test.setNameOfTest(anName);
+			test.setPatient(patient);
+			test.setTypeOfTest("Organoleptic");
 			test.setResult(result);
 			return test;
 		}
@@ -116,7 +118,14 @@ public class DBConnector {
 		else{
 			NumericCriterium test = new NumericCriterium(dbcon);
 			test.setNameOfTest(anName);
-			test.setResult(result);
+			test.setPatient(patient);
+			test.setTypeOfTest("Numeric");
+			try{
+				test.setNumericResult(Double.parseDouble(result));
+			}
+			catch(NumberFormatException e){
+				//can not parse
+			}
 			test.setMesurementUnits(mesUn);
 			return test;
 		}
@@ -156,12 +165,12 @@ public class DBConnector {
 						Analysis an = analysisExists(serviceCode, ep.getAnalyses().asList());
 						if(an != null){
 							//анализ уже существует
-							Test test = testExists(anName, an.getlistOfTests());
+							Test test = testExists(anName, an.getTests().asList());
 							if(test == null){
 								//тест ещё не существует
 								//новый тест
-								Test test1 = createTest(anName, result, mesUn);
-								an.getlistOfTests().add(test1);
+								Test test1 = createTest(anName, result, mesUn, patient);
+								an.getTests().asList().add(test1);
 							}
 						}
 						else{
@@ -174,8 +183,8 @@ public class DBConnector {
 							ep.getAnalyses().asList().add(an1);
 							
 							//новый тест
-							Test test = createTest(anName, result, mesUn);
-							an1.getlistOfTests().add(test);
+							Test test = createTest(anName, result, mesUn, patient);
+							an1.getTests().asList().add(test);
 						}
 					}
 					else{
@@ -193,8 +202,8 @@ public class DBConnector {
 						ep.getAnalyses().asList().add(an1);
 						
 						//новый тест
-						Test test = createTest(anName, result, mesUn);
-						an1.getlistOfTests().add(test);
+						Test test = createTest(anName, result, mesUn, patient);
+						an1.getTests().asList().add(test);
 					}
 				}
 				else{
@@ -219,11 +228,11 @@ public class DBConnector {
 					ep.getAnalyses().asList().add(an1);
 					
 					//новый тест
-					Test test = createTest(anName, result, mesUn);
-					an1.getlistOfTests().add(test);
+					Test test = createTest(anName, result, mesUn, patient);
+					an1.getTests().asList().add(test);
 				}
 			}
-			System.out.println("1 table - OK");
+			System.out.println("upload 1 table - OK");
 			
 			// обрабатываем 2 таблицу
 			for(int i=0; i<tab2.size(); ++i){
@@ -269,7 +278,7 @@ public class DBConnector {
 					patient.getEpicrises().asList().add(diary);
 				}
 			}
-			System.out.println("2 table - OK");
+			System.out.println("upload 2 table - OK");
 		}
 		catch (CacheException ex) {
 			System.out.println("Caught exception: " + ex.getClass().getName() + ": " + ex.getMessage());
@@ -299,26 +308,18 @@ public class DBConnector {
 		}
 	}
 	
-	private void deleteTable(String tableName) throws CacheException{
-		Iterator k = dbcon.openByQuery("SELECT smda."+tableName+".%ID FROM smda."+tableName);
-		while (k.hasNext()) {
-			Persistent item = (Persistent)k.next();
-			Persistent.delete(dbcon, item.getOid());
-		}
-	}
-	
 	public void deleteBD(){
 		try {
-			//deleteTable("NumericCriterium");
-			//deleteTable("OrganolepticCriterium");
-			deleteTable("Test");
-			deleteTable("Analysis");
-			deleteTable("Episode");
-			deleteTable("Epicrisis");
-			deleteTable("Patient");
+			NumericCriterium.sys_KillExtent(dbcon);
+			OrganolepticCriterium.sys_KillExtent(dbcon);
+			Test.sys_KillExtent(dbcon);
+			Analysis.sys_KillExtent(dbcon);
+			Episode.sys_KillExtent(dbcon);
+			Epicrisis.sys_KillExtent(dbcon);
+			Patient.sys_KillExtent(dbcon);
 			
 			connect(); //reconnect
-			System.out.println("DELETE BD OK");
+			System.out.println("CLEAR BD - OK");
 		} catch (CacheException e) {
 			e.printStackTrace();
 			System.out.println("Error while manipulation database. Exit.");

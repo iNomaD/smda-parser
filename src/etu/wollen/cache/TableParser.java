@@ -158,7 +158,7 @@ public class TableParser {
 		        line = br.readLine();
 		    }
 		    br.close();
-		    
+		    System.out.println("Parse tables - OK");
 		}
 		catch(Exception e){
 			e.printStackTrace();
