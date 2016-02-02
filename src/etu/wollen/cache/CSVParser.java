@@ -4,93 +4,11 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
 
-//xlsx table row (abstract)
-abstract class Txrow {
-	private int size;
-	private String[] fld;
-	
-	public Txrow(int size){
-		this.size = size;
-		fld = new String[size];
-	}
-	
-	public String get(int i) throws IndexOutOfBoundsException{
-		if(i < 0 || i >= size){
-			throw new IndexOutOfBoundsException("Field index out of range");
-		}
-		return fld[i];
-	}
-	
-	public void set(int i, String str) throws IndexOutOfBoundsException{
-		if(i < 0 || i >= size){
-			throw new IndexOutOfBoundsException("Field index out of range");
-		}
-		fld[i] = str;
-	}
-}
-
-//row of 1st table
-class T1row extends Txrow{
-	/*
-	 * 0 = count number
-	 * 1 = reg number
-	 * 2 = FIO
-	 * 3 = episode number
-	 * 4 = med code
-	 * 5 = service
-	 * 6 = name of rest
-	 * 7 = result
-	 * 8 = measurement units
-	 * 9 = date
-	 * 10 = time
-	 */
-	public final static int size = 11;
-	public T1row(){
-		super(11);
-	}
-}
-
-// row of 2nd table
-class T2row extends Txrow{
-	/*
-	 * 0 = count number
-	 * 1 = reg number
-	 * 2 = FIO
-	 * 3 = med card number
-	 * 4 = status
-	 * 5 = date
-	 * 6 = data
-	 */
-	public final static int size = 7;
-	public T2row(){
-		super(7);
-	}
-}
-
-
-public class TableParser {
-
-	private DBConnector db = null;
-	private ArrayList<T1row> tab1 = null;
-	private static ArrayList<T2row> tab2 = null;
-	
+public class CSVParser {
 	final static String newline = "<BR>";
 	
-	public TableParser(DBConnector db){
-		this.db = db;
-		tab1 = new ArrayList<T1row>();
-		tab2 = new ArrayList<T2row>();
-	}
-	
-	public void clearBD(){
-		db.deleteBD();
-	}
-	
-	public void upload(){
-		db.upload(tab1, tab2);
-	}
-	
-	public void parse(String table1, String table2) throws Exception{
+	public void parse(String table1, String table2, ArrayList<T1row> tab1, ArrayList<T2row> tab2) throws Exception{
+		
 		BufferedReader br = null;
 		try {
 			//read 1st table
