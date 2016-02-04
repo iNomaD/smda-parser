@@ -8,7 +8,7 @@ package smda.glossary;
 **/
 
 public class AnalysisType extends com.intersys.classes.Persistent {
-    private static final long serialVersionUID = 546;
+    private static final long serialVersionUID = 703;
     private static String CACHE_CLASS_NAME = "smda.glossary.AnalysisType";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).

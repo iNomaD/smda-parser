@@ -23,6 +23,14 @@ public abstract class Txrow {
 		}
 		fld[i] = str;
 	}
+	
+	public void print(){
+		String out = "";
+		for(int i=0; i<size; ++i){
+			out+= (new Integer(i)).toString()+": "+fld[i]+" ";
+		}
+		System.out.println(out);
+	}
 }
 
 //row of 1st table

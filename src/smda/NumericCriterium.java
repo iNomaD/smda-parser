@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class NumericCriterium extends smda.Test {
-    private static final long serialVersionUID = 1840;
+    private static final long serialVersionUID = 5362;
     private static String CACHE_CLASS_NAME = "smda.NumericCriterium";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).

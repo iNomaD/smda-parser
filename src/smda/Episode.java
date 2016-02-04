@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class Episode extends com.intersys.classes.Persistent {
-    private static final long serialVersionUID = 4646;
+    private static final long serialVersionUID = 292;
     private static String CACHE_CLASS_NAME = "smda.Episode";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).
@@ -664,25 +664,28 @@ public class Episode extends com.intersys.classes.Persistent {
        Returns value of property <code>Doctor</code>.
        <p>Description: Лечащий врач</p>
        @return current value of <code>Doctor</code> represented as
-       <code>java.lang.String</code>
+       <code>smda.Doctor</code>
 
        @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
        @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#Doctor"> Doctor</A>
     */
-    public java.lang.String getDoctor()  throws com.intersys.objects.CacheException {
-       com.intersys.cache.Dataholder dh = mInternal.getProperty("Doctor",false);
-       return dh.getString();
+    public smda.Doctor getDoctor()  throws com.intersys.objects.CacheException {
+       com.intersys.cache.Dataholder dh = mInternal.getProperty("Doctor",true);
+        com.intersys.cache.CacheObject cobj = dh.getCacheObject();
+        if (cobj == null)
+            return null;
+        return (smda.Doctor)(cobj.newJavaInstance());
     }
 
     /**
        Sets new value for <code>Doctor</code>.
        <p>Description: Лечащий врач</p>
        @param value new value to be set represented as
-       <code>java.lang.String</code>.
+       <code>smda.Doctor</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
        @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#Doctor"> Doctor</A>
     */
-    public void setDoctor(java.lang.String value)  throws com.intersys.objects.CacheException {
+    public void setDoctor(smda.Doctor value)  throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
         mInternal.setProperty("Doctor", dh);
         return;
@@ -694,25 +697,25 @@ public class Episode extends com.intersys.classes.Persistent {
        Returns value of property <code>EndDate</code>.
        <p>Description: Дата окончания эпизода</p>
        @return current value of <code>EndDate</code> represented as
-       <code>java.lang.String</code>
+       <code>java.sql.Date</code>
 
        @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
        @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#EndDate"> EndDate</A>
     */
-    public java.lang.String getEndDate()  throws com.intersys.objects.CacheException {
+    public java.sql.Date getEndDate()  throws com.intersys.objects.CacheException {
        com.intersys.cache.Dataholder dh = mInternal.getProperty("EndDate",false);
-       return dh.getString();
+       return dh.getDate();
     }
 
     /**
        Sets new value for <code>EndDate</code>.
        <p>Description: Дата окончания эпизода</p>
        @param value new value to be set represented as
-       <code>java.lang.String</code>.
+       <code>java.sql.Date</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
        @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#EndDate"> EndDate</A>
     */
-    public void setEndDate(java.lang.String value)  throws com.intersys.objects.CacheException {
+    public void setEndDate(java.sql.Date value)  throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
         mInternal.setProperty("EndDate", dh);
         return;
@@ -787,25 +790,25 @@ public class Episode extends com.intersys.classes.Persistent {
        Returns value of property <code>StartDate</code>.
        <p>Description: Дата начала эпизода</p>
        @return current value of <code>StartDate</code> represented as
-       <code>java.lang.String</code>
+       <code>java.sql.Date</code>
 
        @throws com.intersys.objects.CacheException if any error occurred during value retrieval.
        @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#StartDate"> StartDate</A>
     */
-    public java.lang.String getStartDate()  throws com.intersys.objects.CacheException {
+    public java.sql.Date getStartDate()  throws com.intersys.objects.CacheException {
        com.intersys.cache.Dataholder dh = mInternal.getProperty("StartDate",false);
-       return dh.getString();
+       return dh.getDate();
     }
 
     /**
        Sets new value for <code>StartDate</code>.
        <p>Description: Дата начала эпизода</p>
        @param value new value to be set represented as
-       <code>java.lang.String</code>.
+       <code>java.sql.Date</code>.
        @throws com.intersys.objects.CacheException if any error occurred during value setting.
        @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#StartDate"> StartDate</A>
     */
-    public void setStartDate(java.lang.String value)  throws com.intersys.objects.CacheException {
+    public void setStartDate(java.sql.Date value)  throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder dh = new com.intersys.cache.Dataholder (value);
         mInternal.setProperty("StartDate", dh);
         return;
@@ -1312,44 +1315,125 @@ after the index filing is completed.
         return;
     }
     /**
-     <p>Runs method DoctorDisplayToLogical in Cache.</p>
-     @param db represented as com.intersys.objects.Database
-     @param _val represented as java.lang.String
+     <p>Runs method DoctorGetObject in Cache.</p>
+     default argument force set to 0
      @throws com.intersys.objects.CacheException if any error occured while running the method.
-     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorDisplayToLogical"> Method DoctorDisplayToLogical</A>
+     @see #DoctorGetObject(java.lang.Integer)
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorGetObject"> Method DoctorGetObject</A>
     */
-    public static java.lang.String DoctorDisplayToLogical (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+    public com.intersys.objects.Oid DoctorGetObject () throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[0];
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("DoctorGetObject",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getOid();
+    }
+    /**
+     <p>Runs method DoctorGetObject in Cache.</p>
+     @param force represented as java.lang.Integer
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorGetObject"> Method DoctorGetObject</A>
+    */
+    public com.intersys.objects.Oid DoctorGetObject (java.lang.Integer force) throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
-        args[0] = new com.intersys.cache.Dataholder(_val);
-        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"DoctorDisplayToLogical",args,com.intersys.objects.Database.RET_PRIM);
+        args[0] = new com.intersys.cache.Dataholder(force);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("DoctorGetObject",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getOid();
+    }
+    /**
+     <p>Runs method DoctorGetObjectId in Cache.</p>
+     default argument force set to 0
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see #DoctorGetObjectId(java.lang.Integer)
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorGetObjectId"> Method DoctorGetObjectId</A>
+    */
+    public java.lang.String DoctorGetObjectId () throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[0];
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("DoctorGetObjectId",args,com.intersys.objects.Database.RET_PRIM);
         return res.getString();
+    }
+    /**
+     <p>Runs method DoctorGetObjectId in Cache.</p>
+     @param force represented as java.lang.Integer
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorGetObjectId"> Method DoctorGetObjectId</A>
+    */
+    public java.lang.String DoctorGetObjectId (java.lang.Integer force) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(force);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("DoctorGetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getString();
+    }
+    /**
+     <p>Runs method DoctorIndexExists in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param K1 represented as smda.Doctor
+     default argument id set to ""
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see #DoctorIndexExists(com.intersys.objects.Database,smda.Doctor,com.intersys.objects.StringHolder)
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorIndexExists"> Method DoctorIndexExists</A>
+    */
+    public static java.lang.Boolean DoctorIndexExists (com.intersys.objects.Database db, smda.Doctor K1) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(K1);
+        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"DoctorIndexExists",args,com.intersys.objects.Database.RET_PRIM);
+        return res.getBoolean();
+    }
+    /**
+     <p>Runs method DoctorIndexExists in Cache.</p>
+     @param db represented as com.intersys.objects.Database
+     @param K1 represented as smda.Doctor
+     @param id represented as com.intersys.objects.StringHolder
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorIndexExists"> Method DoctorIndexExists</A>
+    */
+    public static java.lang.Boolean DoctorIndexExists (com.intersys.objects.Database db, smda.Doctor K1, com.intersys.objects.StringHolder id) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[2];
+        int[] _refs = new int[1];
+        args[0] = new com.intersys.cache.Dataholder(K1);
+        args[1] = com.intersys.cache.Dataholder.create (id.value);
+        _refs[0] = 2;
+        com.intersys.cache.Dataholder[] res=db.runClassMethod(CACHE_CLASS_NAME,"DoctorIndexExists",_refs,args,com.intersys.objects.Database.RET_PRIM);
+        id.set(res[1].getString());
+        return res[0].getBoolean();
     }
     /**
      <p>Runs method DoctorIsValid in Cache.</p>
      @param db represented as com.intersys.objects.Database
-     @param _val represented as java.lang.String
+     @param value represented as java.lang.String
      @throws com.intersys.objects.CacheException if any error occured while running the method.
      @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorIsValid"> Method DoctorIsValid</A>
     */
-    public static void DoctorIsValid (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+    public static void DoctorIsValid (com.intersys.objects.Database db, java.lang.String value) throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
-        args[0] = new com.intersys.cache.Dataholder(_val);
+        args[0] = new com.intersys.cache.Dataholder(value);
         com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"DoctorIsValid",args,com.intersys.objects.Database.RET_PRIM);
         db.parseStatus(res);
         return;
     }
     /**
-     <p>Runs method DoctorLogicalToDisplay in Cache.</p>
-     @param db represented as com.intersys.objects.Database
-     @param _val represented as java.lang.String
+     <p>Runs method DoctorSetObject in Cache.</p>
+     @param newvalue represented as com.intersys.objects.Oid
      @throws com.intersys.objects.CacheException if any error occured while running the method.
-     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorLogicalToDisplay"> Method DoctorLogicalToDisplay</A>
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorSetObject"> Method DoctorSetObject</A>
     */
-    public static java.lang.String DoctorLogicalToDisplay (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+    public void DoctorSetObject (com.intersys.objects.Oid newvalue) throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
-        args[0] = new com.intersys.cache.Dataholder(_val);
-        com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"DoctorLogicalToDisplay",args,com.intersys.objects.Database.RET_PRIM);
-        return res.getString();
+        args[0] = new com.intersys.cache.Dataholder(newvalue);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("DoctorSetObject",args,com.intersys.objects.Database.RET_PRIM);
+        getDatabase().parseStatus(res);
+        return;
+    }
+    /**
+     <p>Runs method DoctorSetObjectId in Cache.</p>
+     @param newid represented as java.lang.String
+     @throws com.intersys.objects.CacheException if any error occured while running the method.
+     @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#DoctorSetObjectId"> Method DoctorSetObjectId</A>
+    */
+    public void DoctorSetObjectId (java.lang.String newid) throws com.intersys.objects.CacheException {
+        com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
+        args[0] = new com.intersys.cache.Dataholder(newid);
+        com.intersys.cache.Dataholder res=mInternal.runInstanceMethod("DoctorSetObjectId",args,com.intersys.objects.Database.RET_PRIM);
+        getDatabase().parseStatus(res);
+        return;
     }
     /**
      <p>Runs method EndDateDisplayToLogical in Cache.</p>
@@ -1358,11 +1442,11 @@ after the index filing is completed.
      @throws com.intersys.objects.CacheException if any error occured while running the method.
      @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#EndDateDisplayToLogical"> Method EndDateDisplayToLogical</A>
     */
-    public static java.lang.String EndDateDisplayToLogical (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+    public static java.sql.Date EndDateDisplayToLogical (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
         args[0] = new com.intersys.cache.Dataholder(_val);
         com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"EndDateDisplayToLogical",args,com.intersys.objects.Database.RET_PRIM);
-        return res.getString();
+        return res.getDate();
     }
     /**
      <p>Runs method EndDateIsValid in Cache.</p>
@@ -1381,11 +1465,11 @@ after the index filing is completed.
     /**
      <p>Runs method EndDateLogicalToDisplay in Cache.</p>
      @param db represented as com.intersys.objects.Database
-     @param _val represented as java.lang.String
+     @param _val represented as java.sql.Date
      @throws com.intersys.objects.CacheException if any error occured while running the method.
      @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#EndDateLogicalToDisplay"> Method EndDateLogicalToDisplay</A>
     */
-    public static java.lang.String EndDateLogicalToDisplay (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+    public static java.lang.String EndDateLogicalToDisplay (com.intersys.objects.Database db, java.sql.Date _val) throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
         args[0] = new com.intersys.cache.Dataholder(_val);
         com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"EndDateLogicalToDisplay",args,com.intersys.objects.Database.RET_PRIM);
@@ -1686,11 +1770,11 @@ after the index filing is completed.
      @throws com.intersys.objects.CacheException if any error occured while running the method.
      @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#StartDateDisplayToLogical"> Method StartDateDisplayToLogical</A>
     */
-    public static java.lang.String StartDateDisplayToLogical (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+    public static java.sql.Date StartDateDisplayToLogical (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
         args[0] = new com.intersys.cache.Dataholder(_val);
         com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"StartDateDisplayToLogical",args,com.intersys.objects.Database.RET_PRIM);
-        return res.getString();
+        return res.getDate();
     }
     /**
      <p>Runs method StartDateIsValid in Cache.</p>
@@ -1709,11 +1793,11 @@ after the index filing is completed.
     /**
      <p>Runs method StartDateLogicalToDisplay in Cache.</p>
      @param db represented as com.intersys.objects.Database
-     @param _val represented as java.lang.String
+     @param _val represented as java.sql.Date
      @throws com.intersys.objects.CacheException if any error occured while running the method.
      @see <a href = "http://Denis-PC:57772/csp/documatic/%25CSP.Documatic.cls?APP=1&PAGE=CLASS&LIBRARY=DENIS&CLASSNAME=smda.Episode#StartDateLogicalToDisplay"> Method StartDateLogicalToDisplay</A>
     */
-    public static java.lang.String StartDateLogicalToDisplay (com.intersys.objects.Database db, java.lang.String _val) throws com.intersys.objects.CacheException {
+    public static java.lang.String StartDateLogicalToDisplay (com.intersys.objects.Database db, java.sql.Date _val) throws com.intersys.objects.CacheException {
         com.intersys.cache.Dataholder[] args = new com.intersys.cache.Dataholder[1];
         args[0] = new com.intersys.cache.Dataholder(_val);
         com.intersys.cache.Dataholder res=db.runClassMethod(CACHE_CLASS_NAME,"StartDateLogicalToDisplay",args,com.intersys.objects.Database.RET_PRIM);
@@ -1728,7 +1812,7 @@ after the index filing is completed.
         return new com.intersys.objects.CacheQuery(db, "smda.Episode_Extent", 0, 0);
     }
 
-    public static Object addToBatchInsert (Object batch, java.sql.Connection con, String cos_Doctor, String cos_EndDate, String cos_EpisodeNumber, Integer cos_Patient, String cos_StartDate) throws java.sql.SQLException {
+    public static Object addToBatchInsert (Object batch, java.sql.Connection con, Integer cos_Doctor, java.sql.Date cos_EndDate, String cos_EpisodeNumber, Integer cos_Patient, java.sql.Date cos_StartDate) throws java.sql.SQLException {
         if (batch == null) {
             com.intersys.jdbc.CacheConnection c = null;
             if (con != null) {
@@ -1742,11 +1826,11 @@ after the index filing is completed.
         }
         com.intersys.jdbc.QuickStatement.Batch qbatch = (com.intersys.jdbc.QuickStatement.Batch) batch;
         com.intersys.jdbc.SysListProxy.setInteger (qbatch.list, 6); // number of columns
-        com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_Doctor);
-        com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_EndDate);
+        com.intersys.jdbc.SysListProxy.setIntegerWrapper(qbatch.list, cos_Doctor);
+        com.intersys.jdbc.SysListProxy.setSQLDate(qbatch.list, cos_EndDate);
         com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_EpisodeNumber);
         com.intersys.jdbc.SysListProxy.setIntegerWrapper(qbatch.list, cos_Patient);
-        com.intersys.jdbc.SysListProxy.setString(qbatch.list, cos_StartDate);
+        com.intersys.jdbc.SysListProxy.setSQLDate(qbatch.list, cos_StartDate);
         com.intersys.jdbc.SysListProxy.setUndefined(qbatch.list); // for x__classname
         qbatch.flushRecord ();
         return qbatch;

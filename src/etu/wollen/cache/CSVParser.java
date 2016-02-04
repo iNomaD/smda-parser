@@ -78,7 +78,7 @@ public class CSVParser {
 		    System.out.println("Parse tables - OK");
 		}
 		catch(Exception e){
-			e.printStackTrace();
+			throw new Exception("Problem parsing xlsx", e);
 		}
 		finally {
 		    br.close();

@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class Test extends com.intersys.classes.Persistent {
-    private static final long serialVersionUID = 1326;
+    private static final long serialVersionUID = 5781;
     private static String CACHE_CLASS_NAME = "smda.Test";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).

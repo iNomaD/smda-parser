@@ -55,13 +55,13 @@ public class DBConnector {
 			//close connection
 			dbcon.close();
 			
-			System.out.println("save OK");
+			//System.out.println("save OK");
 		} catch (CacheException ex) {
 			System.out.println("Caught exception: " + ex.getClass().getName() + ": " + ex.getMessage());
 		}
 	}
 	
-	public void deleteBD(){
+	public void deleteDB(){
 		connect();
 		try {
 			//kill all globals
@@ -72,6 +72,7 @@ public class DBConnector {
 			Episode.sys_KillExtent(dbcon);
 			Epicrisis.sys_KillExtent(dbcon);
 			Patient.sys_KillExtent(dbcon);
+			Doctor.sys_KillExtent(dbcon);
 			
 			//close connection
 			dbcon.close();

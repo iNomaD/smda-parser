@@ -25,8 +25,8 @@ public class Main {
 		String table4 = "data/qword-20160129132836268.xml";
 		String table5 = "data/qword-20160129133552531.xml";
 		try{
-			//clear BD
-			dbc.deleteBD();
+			//clear DB
+			dbc.deleteDB();
 			
 			//parse tables
 			CSVParser csv = new CSVParser();
@@ -34,20 +34,22 @@ public class Main {
 			
 			XMLParser xml = new XMLParser();
 			xml.parse(table3, tab3);
+			xml.parse(table4, tab4);
+			xml.parse(table5, tab5);
 			
 			//upload data
-			dbu.upload(tab1, tab2);
+			dbu.uploadT1(tab1);
+			dbu.uploadT2(tab2);
 			dbu.uploadT3(tab3);
+			dbu.uploadT3(tab4);
+			dbu.uploadT3(tab5);
 			
-			/* show 2nd table
+			/* debug table
 			for(T2row row : tab2){
-				String out = "";
-				for(int i=0; i<T2row.size; ++i){
-					out+= (new Integer(i)).toString()+": "+row.get(i)+" ";
-				}
-				System.out.println(out);
-			}
-			*/
+				row.print();
+			}*/
+			
+			System.out.println("Program has finished");
 		}
 		catch(Exception e){
 			e.printStackTrace();

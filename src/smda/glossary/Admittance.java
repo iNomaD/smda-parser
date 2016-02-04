@@ -8,7 +8,7 @@ package smda.glossary;
 **/
 
 public class Admittance extends com.intersys.classes.Persistent {
-    private static final long serialVersionUID = 5235;
+    private static final long serialVersionUID = 3096;
     private static String CACHE_CLASS_NAME = "smda.glossary.Admittance";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).

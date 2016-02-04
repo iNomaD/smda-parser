@@ -8,7 +8,7 @@ package smda;
 **/
 
 public class OrganolepticCriterium extends smda.Test {
-    private static final long serialVersionUID = 3656;
+    private static final long serialVersionUID = 1025;
     private static String CACHE_CLASS_NAME = "smda.OrganolepticCriterium";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).

@@ -8,7 +8,7 @@ package smda.glossary;
 **/
 
 public class Norms extends com.intersys.classes.SerialObject implements java.io.Serializable {
-    private static final long serialVersionUID = 6184;
+    private static final long serialVersionUID = 6070;
     private static String CACHE_CLASS_NAME = "smda.glossary.Norms";
     /**
            <p>NB: DO NOT USE IN APPLICATION(!!!).
